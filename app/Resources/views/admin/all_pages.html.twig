@@ -1,0 +1,45 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+
+    <table class="table table-hover">
+        <thead>
+        <th>#</th>
+        <th>Title</th>
+        <th>Options</th>
+        </thead>
+        <tbody>
+        {% for page in pages %}
+            <tr>
+                <td>{{ page.id }}</td>
+                <td>{{ page.title }}</td>
+                <td>
+                    <a href="/admin/page/{{ page.id }}/edit" class="btn btn-default">Edit</a>
+                    {#<a href="#" class="btn btn-danger">Delete</a>#}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
+
+{% block pagination %}
+    <div id="pagination">
+        <div class="">
+            <ul class="pagination">
+                {% if pagination > 1 %}
+                    {% for page in 1..pagination + 1 %}
+                        {% if page == current %}
+                            <li><span class="page-numbers current"><span class="num">{{ page }}</span></span>
+                            </li>
+                        {% else %}
+                            <li><a class="page-numbers" href="/admin/pages/{{ page }}">
+                                    <span class="num">{{ page }}</span></a></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endblock pagination %}

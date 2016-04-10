@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+    {% block content %}
+        <div class="content">
+            <div class="col-lg-12">
+                <h1>{{ title }}</h1>
+            </div>
+            {% for category in categories %}
+                    <div class="item-block col col-lg-4">
+                        <div class="inner">
+                            {#<div class="img" style="background-image: url('{{ asset('uploads/') }}{{ article.image.path }}')"></div>#}
+                            {# FOR FIXTURES #}
+                            <div class="img" style="background-image: url('{{ category.image.path }}')"></div>
+                            {# FOR FIXTURES #}
+                            <div class="inner-text">
+                                <a class="title" href="/{{ path('category', { 'slug' : category.slug }, true) }}/1">{{ category.name }}</a>
+
+                                <p class="desc">{{ category.description }}</p>
+
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+        <div id="pagination">
+                <div class="">
+                    <ul class="pagination">
+                        {% if pages > 1 %}
+                            {% for page in 1..pages + 1 %}
+                                {% if page == current %}
+                                    <li><span class="page-numbers current"><span class="num">{{ page }}</span></span></li>
+                                {% else %}
+                                    <li><a class="page-numbers" href="/page/{{ page }}"><span class="num">{{ page }}</span></a></li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+        </div>
+
+
+    {% endblock content %}
+
+
+
+

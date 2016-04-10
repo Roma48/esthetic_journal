@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+    {% block slider %}
+        <div id="slider">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    {% for slide in slides %}
+                        {#<div class="item {% if loop.first %}active{% endif %}" style="background-image: url('{{ asset('uploads/') }}{{ slide.image.path }}')">#}
+                        {#FOR FIXTURES#}
+                        <div class="item {% if loop.first %}active{% endif %}" style="background-image: url('{{ slide.image.path }}')">
+                            {#FOR FIXTURES#}
+                            <div class="dark-shadow">
+                                <div class="carousel-caption">
+                                    <div class="container">
+                                        <a class="category" href="/{{ path('category', { "slug" : slide.categories.slug }, true) }}">
+                                            <i class="fa fa-{{ slide.categories.class }}"></i> {{ slide.categories.name }}
+                                        </a>
+
+                                        <a href="/article/{{ slide.slug }}"><h3>{{ slide.title }}</h3></a>
+
+                                        <p>{{ slide.description }}</p>
+                                        <hr>
+                                        <ul class="meta_data">
+                                            <li class="author">
+                                                <a class="url fn" href="/{{ path("user", { "slug" : slide.users.slug }, true) }}"><span class="fa fa-user"></span>{{ slide.users.firstName }}</a>
+                                            </li>
+                                            <li class="time">
+                                                <time class="value updated" datetime="2012-08-20">
+                                                    <span class="fa fa-calendar-o"></span>August 20, 2012
+                                                </time>
+                                            </li>
+                                            <li class="comment">
+                                                <a href="/"><span class="fa fa-comment-o"></span>{{ slide.comments|length }}</a>
+                                            </li>
+                                            <li class="like">
+                                        <span class="like" data-post_id="20">
+                                            <span class="fa fa-heart-o"></span>
+                                            <span class="count">{{ slide.likes|length }}</span>
+                                        </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block content %}
+        <div class="content">
+
+            {% for article in articles %}
+                    <div class="item-block col col-lg-4">
+                        <div class="inner">
+                            {#<div class="img" style="background-image: url('{{ asset('uploads/') }}{{ article.image.path }}')"></div>#}
+                            {# FOR FIXTURES #}
+                            <div class="img" style="background-image: url('{{ article.image.path }}')"></div>
+                            {# FOR FIXTURES #}
+                            <div class="inner-text">
+                                <a class="category" href="/{{ path('category', { 'slug' : article.categories.slug }, true) }}/1">
+                                    <i class="fa fa-{{ article.categories.class }}"></i> {{ article.categories.name }}
+                                </a>
+                                <a class="title" href="/article/{{ article.slug }}">{{ article.title }}</a>
+
+                                <p class="desc">{{ article.description }}...</p>
+
+                                <div class="item-footer">
+                                    <hr>
+                                    <ul class="meta_data">
+                                        <li class="author">
+                                            <a class="url fn" href="/{{ path("user", { "slug" : article.users.slug }, true) }}">
+                                                <span class="fa fa-user"></span>{{ article.users.firstName }}
+                                            </a>
+                                        </li>
+                                        <li class="comment">
+                                            <a href="/"><span class="fa fa-comment-o"></span>{{ article.comments|length }}</a>
+                                        </li>
+                                        <li class="like">
+                                            <span class="post-like">
+                                                <span class="fa fa-heart-o"></span>
+                                                <span class="count">{{ article.likes|length }}</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+
+        <div id="pagination">
+                <div class="">
+                    <ul class="pagination">
+                        {% if articles|length / 9 > 1 %}
+                            {% for page in 1..articles|length / 9 + 1 %}
+                                {% if page == current %}
+                                    <li><span class="page-numbers current"><span class="num">{{ page }}</span></span></li>
+                                {% else %}
+                                    <li><a class="page-numbers" href="/page/{{ page }}"><span class="num">{{ page }}</span></a></li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+        </div>
+
+
+    {% endblock content %}
+
+
+
+

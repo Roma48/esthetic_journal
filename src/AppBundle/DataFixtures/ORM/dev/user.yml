@@ -1,0 +1,8 @@
+AppBundle\Entity\User:
+  user_{1..100}:
+    firstName: <firstName()>
+    lastName: <lastName()>
+    salt: 11111111111111111111111111111111111111111111
+    username (unique): <firstName()>
+    roles: ROLE_USER
+    password: <lastName()>

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+    {% block content %}
+
+        <div class="content col col-lg-8">
+            <h1>Profile:</h1>
+            <div class="article-text">
+                <p>First Name: {{ user.firstName }}</p>
+                <p>Last Name: {{ user.lastName }}</p>
+                <p>Age: {{ user.age }}</p>
+                <p>Birth day: {{ user.birthDay|date("d/m/Y") }}</p>
+            </div>
+        </div>
+    {% endblock content %}
+
+
+

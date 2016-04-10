@@ -1,0 +1,5 @@
+AppBundle\Entity\Comment:
+    comment_{1..200}:
+        message: <realText($maxNbChars = 200, $indexSize = 2)>
+        user: @user*
+        article: @article*

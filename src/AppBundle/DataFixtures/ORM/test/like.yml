@@ -1,0 +1,4 @@
+AppBundle\Entity\Like:
+  like_{1..200}:
+    article : @article*
+    user: @user*

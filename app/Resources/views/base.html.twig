@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{{ title }}{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body class="{{ class }}">
+
+        <div id="header">
+                    <div class="container">
+                        <div id="logo">
+                            <a href="/"><img src="{{ asset('img/blog_logo.png') }}" alt=""></a>
+                        </div>
+                        <div id="main-menu">
+                            <ul id="top-menu">
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/{{ path('blog', { "number" : 1}, true) }}">Blog</a></li>
+                                <li><a href="/">About</a></li>
+                                <li><a href="/">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+        {% block slider %}{% endblock %}
+
+        {% block header_image %}{% endblock %}
+
+        <div id="content">
+                <div class="container">
+                    {% block content %}{% endblock content %}
+                    {% block sidebar %}{% endblock sidebar %}
+                </div>
+            </div>
+
+        <div id="footer">
+                    <div class="container">
+                        <div class="footer-cols">
+                            <div class="col col-lg-3">
+                                <div class="content">
+                                    <p><img src="{{ asset('img/crystal-white.png') }}" alt="" style="margin-bottom: 20px"></p>
+
+                                    <p>Crystal is a personal blog and magazine WordPress theme that lets you present your thoughts
+                                        and information in an elegant way.</p>
+
+                                    <p>Start Building your website in few minutes and get the support of retina, responsive, rtl and
+                                        WPML and much more at your finger tip.</p>
+                                </div>
+                            </div>
+
+                            <div class="col col-lg-3">
+                                <div class="content">
+                                    <h3 class="title">Recent Posts</h3>
+                                    <ul>
+                                        <li>
+                                            <a href="/">Fly Directly Into a Fireworks Display With This Drone Footage</a>
+                                            <span class="post-date">November 1, 2014</span>
+                                        </li>
+                                        <li>
+                                            <a href="/">How the Internet is Democratizing Luxury</a>
+                                            <span class="post-date">September 22, 2014</span>
+                                        </li>
+                                        <li>
+                                            <a href="/">10 Frozen Cocktails for a Buzzy Fourth of July</a>
+                                            <span class="post-date">September 20, 2014</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col col-lg-3">
+                                <div class="content">
+                                    <h3 class="title">Recent Posts</h3>
+                                    <ul>
+                                        <li>
+                                            <a href="/">Fly Directly Into a Fireworks Display With This Drone Footage</a>
+                                            <span class="post-date">November 1, 2014</span>
+                                        </li>
+                                        <li>
+                                            <a href="/">How the Internet is Democratizing Luxury</a>
+                                            <span class="post-date">September 22, 2014</span>
+                                        </li>
+                                        <li>
+                                            <a href="/">10 Frozen Cocktails for a Buzzy Fourth of July</a>
+                                            <span class="post-date">September 20, 2014</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col col-lg-3">
+                                <div class="content">
+                                    <p><img src="{{ asset('img/crystal-white.png') }}" alt=""></p>
+
+                                    <p>Crystal is a personal blog and magazine WordPress theme that lets you present your thoughts
+                                        and information in an elegant way.</p>
+
+                                    <p>Start Building your website in few minutes and get the support of retina, responsive, rtl and
+                                        WPML and much more at your finger tip.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        <div id="footer-bottom">
+                    <div class="container">
+                        <div class="col col-lg-6">
+                            <div class="copyright">Copyright ©2016. Designed by
+                                <a href="/">Roma Paliy</a>
+                            </div>
+                        </div>
+                        <div class="col col-lg-6">
+                            <div class="social_icons">
+                                <div class="single_social_icon"><a class=" fa fa-facebook" href="#" target="_blank"></a></div>
+                                <div class="single_social_icon"><a class=" fa fa-twitter" href="#" target="_blank"></a></div>
+                                <div class="single_social_icon"><a class=" fa fa-google-plus" href="#" target="_blank"></a></div>
+                                <div class="single_social_icon"><a class=" fa fa-linkedin" href="#" target="_blank"></a></div>
+                                <div class="single_social_icon"><a class=" fa fa-instagram" href="#" target="_blank"></a></div>
+                                <div class="single_social_icon"><a class=" fa fa-dribbble" href="#" target="_blank"></a></div>
+                                <div class="single_social_icon"><a class=" fa fa-behance" href="#" target="_blank"></a></div>
+                                <div class="single_social_icon"><a class=" fa fa-youtube" href="#" target="_blank"></a></div>
+                                <div class="single_social_icon"><a class=" fa fa-vimeo-square" href="#" target="_blank"></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        {% block javascripts %}
+            <script src="{{ asset('js/main.min.js') }}"></script>
+            <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        {% endblock %}
+    </body>
+</html>

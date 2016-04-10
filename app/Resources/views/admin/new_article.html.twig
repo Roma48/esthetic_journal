@@ -1,0 +1,11 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="{{ button }}" class="btn btn-default">
+    {{ form_end(form) }}
+
+{% endblock content %}

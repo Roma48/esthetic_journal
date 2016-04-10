@@ -1,0 +1,6 @@
+AppBundle\Entity\Category:
+    category_{1..5}:
+        name: <company()>
+        class: random
+        image: @image*
+        description: <realText($maxNbChars = 200, $indexSize = 2)>

@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+    {% block header_image %}
+        <div id="header-image">
+            {#<div class="image-wrapper" style="background-image: url('{{ asset('uploads/') }}{{ article.image.path }}')">#}
+                {# FOR FIXTURES #}
+            <div class="image-wrapper" style="background-image: url('{{ article.image.path }}')">
+                {# FOR FIXTURES #}
+                <div class="dark-shadow">
+                    <div class="container">
+                        <div class="article-caption">
+
+                            <a class="category" href="{{ path('category', { "slug" : article.categories.slug }) }}"><i class="fa fa-{{ article.categories.class }}"></i> {{ article.categories.name }}</a>
+
+                            <h3>{{ article.title }}</h3>
+
+                            <p>{{ article.description }}</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock header_image %}
+
+    {% block content %}
+
+        <div class="content col col-lg-8">
+            <div class="meta_data">
+                        <ul>
+                            <li class="author"><a class="url fn" href="{{ path('user', { "slug" : article.users.slug }) }}">
+                                    <span class="fa fa-user"></span>{{ article.users.firstName }}
+                                </a>
+                            </li>
+                            <li class="time">
+                                <time class="value updated" datetime="2013-07-20">
+                                    <span class="fa fa-calendar-o"></span>
+                                    July
+                                    20, 2013, 2 years ago
+                                </time>
+                            </li>
+                            <li class="comment">
+                                <a href="/">
+                                    <span class="fa fa-comment-o"></span>{{ article.comments|length }}
+                                </a>
+                            </li>
+                            <li class="like">
+                                <span class="post-like">
+                                    <span class="fa fa-heart-o"></span>
+                                    <span class="count">{{ article.likes|length }}</span>
+                                </span>
+                            </li>
+                            <li class="views">
+                                <span class="fa fa-eye"></span>
+                                <span class="views">{{ article.views }}</span>
+                            </li>
+                        </ul>
+                    </div>
+            <div class="article-text">
+                      {{ article.content }}
+
+
+                <div id="comments">
+                    <h2>Comments</h2>
+
+                    {% for comment in comments %}
+                        <div class="comment">
+                            <h4>{{ comment.user.username }}</h4>
+                            <p>{{ comment.message }}</p>
+                        </div>
+                    {% endfor %}
+
+                    {% if app.user %}
+                        {{ form_start(form) }}
+                        {{ form_row(form.message) }}
+                        <input type="submit" value="Add Comment" class="btn btn-default">
+                        {{ form_end(form) }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+
+    {% endblock content %}
+
+    {% block sidebar %}
+        <div class="sidebar col col-lg-4">
+                   <div class="latest-posts">
+
+                       <h2>Most viewed posts</h2>
+
+                       {% for article in popularArticles() %}
+                           <article>
+                               <div class="thumb-hover" style="background-image: url({{ article.image.path }})"></div>
+                               <div class="post-content">
+                                   <h3><a href="{{ path('article', { "slug" : article.slug }) }}">{{ article.title }}</a>
+                                   </h3>
+                                   <ul class="meta_data">
+                                       <li class="category">
+                                           <a href="{{ path('category', { "slug" : article.categories.slug }) }}" class="c5-meta-cat category-5">
+                                               <span class="fa fa-{{ article.categories.class }}"></span>{{ article.categories.name }}
+                                           </a>
+                                       </li>
+                                       <li class="like">
+                                    <span class="c5-post-like">
+                                        <span class="fa fa-heart-o"></span>
+                                        <span class="count">{{ article.likes|length }}</span>
+                                    </span>
+                                       </li>
+                                   </ul>
+                                   <div class="clearfix"></div>
+                               </div>
+                           </article>
+                       {% endfor %}
+                   </div>
+               </div>
+    {% endblock sidebar %}
+

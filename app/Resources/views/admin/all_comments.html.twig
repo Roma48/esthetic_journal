@@ -1,0 +1,47 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+
+    <table class="table table-hover">
+        <thead>
+        <th>#</th>
+        <th>Article</th>
+        <th>Message</th>
+        <th>Options</th>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.id }}</td>
+                <td>{{ comment.article.title }}</td>
+                <td>{{ comment.message }}</td>
+                <td>
+                    <a href="/admin/comment/{{ comment.id }}/edit" class="btn btn-default">Edit</a>
+                    {#<a href="#" class="btn btn-danger">Delete</a>#}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
+
+{% block pagination %}
+    <div id="pagination">
+        <div class="">
+            <ul class="pagination">
+                {% if pages > 1 %}
+                    {% for page in 1..pages + 1 %}
+                        {% if page == current %}
+                            <li><span class="page-numbers current"><span class="num">{{ page }}</span></span>
+                            </li>
+                        {% else %}
+                            <li><a class="page-numbers" href="/admin/comments/{{ page }}">
+                                    <span class="num">{{ page }}</span></a></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endblock pagination %}

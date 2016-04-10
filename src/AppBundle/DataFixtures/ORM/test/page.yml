@@ -1,0 +1,4 @@
+AppBundle\Entity\Page:
+  user_{1..100}:
+    title: <realText($maxNbChars = 40, $indexSize = 2)>
+    content: <realText($maxNbChars = 2000, $indexSize = 2)>

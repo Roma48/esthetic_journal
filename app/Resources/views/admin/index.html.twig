@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body class="admin">
+
+        <div class="col col-lg-2" id="sidebar">
+            <div class="container">
+                <a href="/" id="logo"><img src="{{ asset('img/crystal-white.png') }}" alt="Logo"></a>
+                <ul class="admin-menu">
+                    <li><a href="#">Articles</a>
+                        <ul class="sub-menu">
+                            <li><a href="/admin/article/new">Add New</a></li>
+                            <li><a href="/admin/articles/1">All Articles</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Comments</a>
+                        <ul class="sub-menu">
+                            <li><a href="/admin/comment/new">Add New</a></li>
+                            <li><a href="/admin/comments/1">All Comments</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Pages</a>
+                        <ul class="sub-menu">
+                            <li><a href="/admin/page/new">Add New</a></li>
+                            <li><a href="/admin/pages/1">All Pages</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Users</a>
+                        <ul class="sub-menu">
+                            <li><a href="/admin/user/new">Add New</a></li>
+                            <li><a href="/admin/users/1">All Users</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Images</a>
+                        <ul class="sub-menu">
+                            <li><a href="/admin/image/new">Add New</a></li>
+                            <li><a href="/admin/images/1">All Images</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Categories</a>
+                        <ul class="sub-menu">
+                            <li><a href="/admin/category/new">Add New</a></li>
+                            <li><a href="/admin/categories/1">All Categories</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col col-lg-10" id="content">
+            <div class="container">
+                {% block content %}{% endblock content %}
+
+                {% block pagination %}{% endblock pagination %}
+
+            </div>
+        </div>
+
+        {% block javascript %}
+            <script src="{{ asset('js/main.min.js') }}"></script>
+        {% endblock %}
+</body>
+</html>
+
