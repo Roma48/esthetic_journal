@@ -18,15 +18,15 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add("title", TextType::class, [
-                'label' => 'Title',
+                'label' => 'Заголовок',
                 'attr' => ['class' => 'form-control']
             ])
             ->add("description", TextareaType::class, [
-                'label' => 'Description',
+                'label' => 'Опис',
                 'attr' => ['class' => 'form-control']
             ])
             ->add("content", TextareaType::class, [
-                'label' => 'Content',
+                'label' => 'Повна версія',
                 'attr' => ['class' => 'form-control']
             ])
             ->add("image", ImageType::class, [
@@ -35,12 +35,14 @@ class ArticleType extends AbstractType
             ->add("categories", EntityType::class, [
                 'choice_label' => 'name',
                 'attr' => ['class' => 'form-control'],
-                'class' => 'AppBundle\Entity\Category'
+                'class' => 'AppBundle\Entity\Category',
+                'label' => 'Категорія'
             ])
             ->add("users", EntityType::class, [
                 'choice_label' => 'firstName',
                 'attr' => ['class' => 'form-control'],
-                'class' => 'AppBundle\Entity\User'
+                'class' => 'AppBundle\Entity\User',
+                'label' => 'Користувач'
             ])
         ;
     }

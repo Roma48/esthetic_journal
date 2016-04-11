@@ -18,21 +18,21 @@ class UserType extends AbstractType
     {
         $builder
             ->add("firstName", TextType::class, [
-                'label' => 'First Name',
+                'label' => 'Ім\'я',
                 'attr' => ['class' => 'form-control']
             ])
             ->add("lastName", TextareaType::class, [
-                'label' => 'Last Name',
+                'label' => 'Прізвище',
                 'attr' => ['class' => 'form-control']
             ])
             ->add("age", IntegerType::class, [
-                'label' => 'Age',
+                'label' => 'Вік',
                 'attr' => ['class' => 'form-control']
             ])
-            ->add("birthDay", DateTimeType::class, [
-                'label' => 'Birth day',
-                'attr' => ['class' => 'form-control']
-            ])
+//            ->add("birthDay", DateTimeType::class, [
+//                'label' => 'Дата народження',
+//                'attr' => ['class' => 'form-control']
+//            ])
         ;
     }
     public function configureOptions(OptionsResolver $resolver)

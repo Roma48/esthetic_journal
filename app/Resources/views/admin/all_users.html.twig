@@ -6,9 +6,9 @@
     <table class="table table-hover">
         <thead>
         <th>#</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Options</th>
+        <th>Ім'я</th>
+        <th>Прізвище</th>
+        <th>Опції</th>
         </thead>
         <tbody>
         {% for user in users %}
@@ -17,7 +17,7 @@
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.lastName }}</td>
                 <td>
-                    <a href="/admin/user/{{ user.id }}/edit" class="btn btn-default">Edit</a>
+                    <a href="/admin/user/{{ user.id }}/edit" class="btn btn-default">Редагувати</a>
                     {#<a href="/admin/article/{{ article.id }}/delete" class="btn btn-danger">Delete</a>#}
                 </td>
             </tr>

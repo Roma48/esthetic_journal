@@ -17,11 +17,11 @@ class PageType extends AbstractType
     {
         $builder
             ->add("title", TextType::class, [
-                'label' => 'Title',
+                'label' => 'Заголовок',
                 'attr' => ['class' => 'form-control']
             ])
             ->add("content", TextareaType::class, [
-                'label' => 'Content',
+                'label' => 'Повний текст',
                 'attr' => ['class' => 'form-control']
             ])
         ;

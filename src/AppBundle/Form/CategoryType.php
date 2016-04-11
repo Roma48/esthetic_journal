@@ -17,15 +17,15 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add("name", TextType::class, [
-                'label' => 'Name',
+                'label' => 'Назва',
                 'attr' => ['class' => 'form-control']
             ])
             ->add("description", TextareaType::class, [
-                'label' => 'Description',
+                'label' => 'Опис',
                 'attr' => ['class' => 'form-control']
             ])
             ->add("class", TextType::class, [
-                'label' => 'Class',
+                'label' => 'Css class',
                 'attr' => ['class' => 'form-control']
             ])
             ->add("image", ImageType::class, [

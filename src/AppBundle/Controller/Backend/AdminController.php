@@ -33,7 +33,7 @@ class AdminController extends Controller
 
         return $this->render('admin/index.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'All Articles',
+            'title' => 'Всі новини',
             'articles' => $articles,
             'pages' => (int) count($articles)/9,
             'current' => 1
@@ -49,7 +49,7 @@ class AdminController extends Controller
 
         return $this->render('admin/all_articles.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'All Articles',
+            'title' => 'Всі новини',
             'articles' => $articles,
             'pages' => (int) count($articles)/9,
             'current' => $page
@@ -65,7 +65,7 @@ class AdminController extends Controller
 
         $form = $this->createForm(ArticleType::class, $article);
 
-        $buttonName = 'Add Article';
+        $buttonName = 'Додати новину';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -79,7 +79,7 @@ class AdminController extends Controller
 
         return $this->render('admin/new_article.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'New Article',
+            'title' => 'Додати новину',
             'form' => $form->createView(),
             'button' => $buttonName
         ));
@@ -94,7 +94,7 @@ class AdminController extends Controller
 
         $form = $this->createForm(ArticleType::class, $article);
 
-        $buttonName = 'Edit Article';
+        $buttonName = 'Зберегти';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -108,7 +108,7 @@ class AdminController extends Controller
 
         return $this->render('admin/new_article.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'Edit Article',
+            'title' => 'Редагувати новину',
             'form' => $form->createView(),
             'button' => $buttonName
         ));
@@ -125,7 +125,7 @@ class AdminController extends Controller
 
         $form = $this->createForm(ImageType::class, $image);
 
-        $buttonName = 'Add Image';
+        $buttonName = 'Додати картинку';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -139,7 +139,7 @@ class AdminController extends Controller
 
         return $this->render('admin/new_article.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'New Image',
+            'title' => 'Нова картинка',
             'form' => $form->createView(),
             'button' => $buttonName
         ));
@@ -156,7 +156,7 @@ class AdminController extends Controller
 
         $form = $this->createForm(ImageType::class, $image);
 
-        $buttonName = 'Edit Image';
+        $buttonName = 'Редагувати картинку';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -170,7 +170,7 @@ class AdminController extends Controller
 
         return $this->render('admin/new_article.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'New Image',
+            'title' => 'Нова картинка',
             'form' => $form->createView(),
             'button' => $buttonName
         ));
@@ -185,7 +185,7 @@ class AdminController extends Controller
 
         return $this->render('admin/all_images.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'All Images',
+            'title' => 'Всі картинки',
             'images' => $images,
             'pages' => (int) count($images)/9,
             'current' => $page
@@ -201,7 +201,7 @@ class AdminController extends Controller
 
         $form = $this->createForm(UserType::class, $user);
 
-        $buttonName = 'Add User';
+        $buttonName = 'Додати користувача';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -215,7 +215,7 @@ class AdminController extends Controller
 
         return $this->render('admin/new_article.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'New User',
+            'title' => 'Новий користувач',
             'form' => $form->createView(),
             'button' => $buttonName
         ));
@@ -230,7 +230,7 @@ class AdminController extends Controller
 
         $form = $this->createForm(UserType::class, $user);
 
-        $buttonName = 'Edit User';
+        $buttonName = 'Зберегти';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -244,7 +244,7 @@ class AdminController extends Controller
 
         return $this->render('admin/new_article.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'Edit User',
+            'title' => 'Редагувати користувача',
             'form' => $form->createView(),
             'button' => $buttonName
         ));
@@ -259,7 +259,7 @@ class AdminController extends Controller
 
         return $this->render('admin/all_users.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'All Users',
+            'title' => 'Всі користувачі',
             'users' => $users,
             'pages' => (int) count($users)/9,
             'current' => $page
@@ -275,7 +275,7 @@ class AdminController extends Controller
 
         $form = $this->createForm(CategoryType::class, $category);
 
-        $buttonName = 'Add Category';
+        $buttonName = 'Додати категорію';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -289,7 +289,7 @@ class AdminController extends Controller
 
         return $this->render('admin/new_article.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'New Category',
+            'title' => 'Нова категорія',
             'form' => $form->createView(),
             'button' => $buttonName
         ));
@@ -304,7 +304,7 @@ class AdminController extends Controller
 
         $form = $this->createForm(CategoryType::class, $category);
 
-        $buttonName = 'Edit Category';
+        $buttonName = 'Зберегти';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -318,7 +318,7 @@ class AdminController extends Controller
 
         return $this->render('admin/new_article.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'New Category',
+            'title' => 'Редагувати категорію',
             'form' => $form->createView(),
             'button' => $buttonName
         ));
@@ -333,7 +333,7 @@ class AdminController extends Controller
 
         return $this->render('admin/all_categories.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'All Categories',
+            'title' => 'Всі категорії',
             'categories' => $categories,
             'pages' => (int) count($categories)/9,
             'current' => $page
@@ -349,7 +349,7 @@ class AdminController extends Controller
 
         $form = $this->createForm(AdminCommentType::class, $comment);
 
-        $buttonName = 'Add Comment';
+        $buttonName = 'Додати коментар';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -363,7 +363,7 @@ class AdminController extends Controller
 
         return $this->render('admin/new_article.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'New Comment',
+            'title' => 'Новий коментар',
             'form' => $form->createView(),
             'button' => $buttonName
         ));
@@ -378,7 +378,7 @@ class AdminController extends Controller
 
         $form = $this->createForm(AdminCommentType::class, $comment);
 
-        $buttonName = 'Edit Comment';
+        $buttonName = 'Зберегти';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -392,7 +392,7 @@ class AdminController extends Controller
 
         return $this->render('admin/new_article.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'Edit Comment',
+            'title' => 'Редагувати коментар',
             'form' => $form->createView(),
             'button' => $buttonName
         ));
@@ -407,7 +407,7 @@ class AdminController extends Controller
 
         return $this->render('admin/all_comments.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'All Comments',
+            'title' => 'Всі коментарі',
             'comments' => $comments,
             'pages' => (int) count($comments)/9,
             'current' => $page
@@ -423,7 +423,7 @@ class AdminController extends Controller
 
         $form = $this->createForm(PageType::class, $category);
 
-        $buttonName = 'Add Page';
+        $buttonName = 'Додати сторінку';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -437,7 +437,7 @@ class AdminController extends Controller
 
         return $this->render('admin/new_article.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'New Page',
+            'title' => 'Нова сторінка',
             'form' => $form->createView(),
             'button' => $buttonName
         ));
@@ -452,7 +452,7 @@ class AdminController extends Controller
 
         $form = $this->createForm(PageType::class, $category);
 
-        $buttonName = 'Edit Page';
+        $buttonName = 'Зберегти';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -466,7 +466,7 @@ class AdminController extends Controller
 
         return $this->render('admin/new_article.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'Edit Page',
+            'title' => 'Редагувати сторінку',
             'form' => $form->createView(),
             'button' => $buttonName
         ));
@@ -481,7 +481,7 @@ class AdminController extends Controller
 
         return $this->render('admin/all_pages.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'All Pages',
+            'title' => 'Всі стоірнки',
             'pages' => $pages,
             'pagination' => (int) count($pages)/9,
             'current' => $page

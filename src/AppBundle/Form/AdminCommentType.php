@@ -14,13 +14,14 @@ class AdminCommentType extends AbstractType
     {
         $builder
             ->add("message", TextareaType::class, [
-                'label' => 'Message',
+                'label' => 'Коментар',
                 'attr' => ['class' => 'form-control']
             ])
             ->add("article", EntityType::class, [
                 'choice_label' => 'title',
                 'attr' => ['class' => 'form-control'],
-                'class' => 'AppBundle\Entity\Article'
+                'class' => 'AppBundle\Entity\Article',
+                'label' => 'Новина'
             ])
         ;
     }

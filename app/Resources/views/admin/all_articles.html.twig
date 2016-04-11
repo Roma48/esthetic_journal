@@ -6,8 +6,8 @@
     <table class="table table-hover">
         <thead>
         <th>#</th>
-        <th>Title</th>
-        <th>Options</th>
+        <th>Заголовок</th>
+        <th>Опції</th>
         </thead>
         <tbody>
         {% for article in articles %}
@@ -15,7 +15,7 @@
                 <td>{{ article.id }}</td>
                 <td>{{ article.title }}</td>
                 <td>
-                    <a href="/admin/article/{{ article.id }}/edit" class="btn btn-default">Edit</a>
+                    <a href="/admin/article/{{ article.id }}/edit" class="btn btn-default">Редагувати</a>
                     {#<a href="/admin/article/{{ article.id }}/delete" class="btn btn-danger">Delete</a>#}
                 </td>
             </tr>

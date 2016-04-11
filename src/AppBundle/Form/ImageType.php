@@ -18,7 +18,7 @@ class ImageType extends AbstractType
     {
         $builder
             ->add("file", null, [
-                'label' => 'Image',
+                'label' => 'Картинка',
                 'attr' => ['class' => 'form-control']
             ])
         ;
