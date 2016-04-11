@@ -43,7 +43,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin/articles/{page}", name="admin_articles")
      */
-    public function articlesPageAction(Request $request, $page)
+    public function articlesPageAction(Request $request, $page = 1)
     {
         $articles = $this->get('app.pagination')->getArticles($page);
 
@@ -179,7 +179,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin/images/{page}", name="admin_images")
      */
-    public function imagesPageAction(Request $request, $page)
+    public function imagesPageAction(Request $request, $page = 1)
     {
         $images = $this->getDoctrine()->getRepository('AppBundle:Image')->getPage($page);
 
@@ -253,7 +253,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin/users/{page}", name="admin_users")
      */
-    public function usersPageAction(Request $request, $page)
+    public function usersPageAction(Request $request, $page = 1)
     {
         $users = $this->getDoctrine()->getRepository('AppBundle:User')->getPage($page);
 
@@ -327,7 +327,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin/categories/{page}", name="admin_categories")
      */
-    public function categoriesPageAction(Request $request, $page)
+    public function categoriesPageAction(Request $request, $page = 1)
     {
         $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findAll();
 
@@ -401,7 +401,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin/comments/{page}", name="admin_comments")
      */
-    public function commentsPageAction(Request $request, $page)
+    public function commentsPageAction(Request $request, $page = 1)
     {
         $comments = $this->getDoctrine()->getRepository('AppBundle:Comment')->getPage($page);
 
@@ -475,7 +475,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin/pages/{page}", name="admin_pages")
      */
-    public function pagesAction(Request $request, $page)
+    public function pagesAction(Request $request, $page = 1)
     {
         $pages = $this->getDoctrine()->getRepository('AppBundle:Page')->getPage($page);
 

@@ -1,118 +1,237 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
 
-    {% block header_image %}
-        <div id="header-image">
-            {#<div class="image-wrapper" style="background-image: url('{{ asset('uploads/') }}{{ article.image.path }}')">#}
-                {# FOR FIXTURES #}
-            <div class="image-wrapper" style="background-image: url('{{ article.image.path }}')">
-                {# FOR FIXTURES #}
-                <div class="dark-shadow">
-                    <div class="container">
-                        <div class="article-caption">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="The Page Description">
+    <style type="text/css">@-ms-viewport{width: device-width;}</style>
+    <title>Esthetic Content</title>
+    <link rel="stylesheet" href="{{ asset('css/layers.min.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ asset('css/style-frontend.css') }}" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+</head>
 
-                            <a class="category" href="{{ path('category', { "slug" : article.categories.slug }) }}"><i class="fa fa-{{ article.categories.class }}"></i> {{ article.categories.name }}</a>
+<body class="single single-post">
 
-                            <h3>{{ article.title }}</h3>
+<header role="banner" class="transparent light">
+    <div class="row">
+        <div class="nav-inner row-content buffer-left buffer-right even clear-after">
+            <div id="brand">
+                <h1 class="reset"><!--<img src="img/logo.png" alt="logo">--><a href="{{ path('homepage') }}">Esthetic Journal</a></h1>
+            </div><!-- brand -->
+            <a id="menu-toggle" href="#"><i class="fa fa-bars fa-lg"></i></a>
+            <nav>
+                <ul class="reset" role="navigation">
+                    <li class="menu-item">
+                        <a href="index.html">Главная</a>
+                        <ul class="sub-menu">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="news.html">Новости</a>
+                        <ul class="sub-menu">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">6</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Видео</a>
+                        <ul class="sub-menu">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="#">О Нас</a></li>
+                    <li class="menu-item">
+                        <a href="#">Поиск</a>
+                    </li>
+                    <li class="menu-item"><a href="#">Контакты</a></li>
+                </ul>
+            </nav>
+        </div><!-- row-content -->
+    </div><!-- row -->
+</header>
 
-                            <p>{{ article.description }}</p>
-
-                        </div>
-                    </div>
-                </div>
+<main role="main">
+    <div id="intro-wrap" class="full-height">
+        <div id="intro" class="preload darken more-button">
+            <div class="intro-item" style="background-image: url({{ article.image.path }});">
+                <div class="photocaption">
+                    <h4>Photography by <a href="vk.com/awaylastdays">Vadim Bryklia</a></h4>
+                </div><!-- photocaption -->
             </div>
-        </div>
-    {% endblock header_image %}
+        </div><!-- intro -->
+    </div><!-- intro-wrap -->
 
-    {% block content %}
+    <div id="main" class="row">
+        <div class="row-content buffer-left buffer-right buffer-bottom clear-after">
+            <div id="post-nav">
+                <ul class="clear-after reset plain">
+                    <li id="prev-items" class="post-nav"><a href="#"><i class="fa fa-chevron-left"></i><span class="label hidden-mobile">Пред.</span></a></li>
+                    <li id="all-items" class="post-nav"><a href="#"><i class="icon icon-images"></i></a></li>
+                    <li id="next-items" class="post-nav"><a href="#"><span class="label hidden-mobile">След.</span><i class="fa fa-chevron-right"></i></a></li>
+                </ul>
+            </div>
 
-        <div class="content col col-lg-8">
-            <div class="meta_data">
-                        <ul>
-                            <li class="author"><a class="url fn" href="{{ path('user', { "slug" : article.users.slug }) }}">
-                                    <span class="fa fa-user"></span>{{ article.users.firstName }}
-                                </a>
-                            </li>
-                            <li class="time">
-                                <time class="value updated" datetime="2013-07-20">
-                                    <span class="fa fa-calendar-o"></span>
-                                    July
-                                    20, 2013, 2 years ago
-                                </time>
-                            </li>
-                            <li class="comment">
-                                <a href="/">
-                                    <span class="fa fa-comment-o"></span>{{ article.comments|length }}
-                                </a>
-                            </li>
-                            <li class="like">
-                                <span class="post-like">
-                                    <span class="fa fa-heart-o"></span>
-                                    <span class="count">{{ article.likes|length }}</span>
-                                </span>
-                            </li>
-                            <li class="views">
-                                <span class="fa fa-eye"></span>
-                                <span class="views">{{ article.views }}</span>
-                            </li>
+            <div class="post-area clear-after">
+                <article role="main" class="column nine">
+                    <h5 class="meta-post"><a href="{{ path('category', {"slug" : article.categories.slug, "page" : 1}) }}">{{ article.categories.name }}</a> - <time datetime="2013-11-09">Февраль 18, 2016</time></h5>
+                    <h1>{{ article.title }}</h1>
+                    <p>{{ article.content }}</p>
+                </article>
+
+                <aside role="complementary" class="sidebar column three last">
+                    <div class="widget widget_search">
+                        <form role="search">
+                            <span class="pre-input"><i class="icon icon-search"></i></span>
+                            <input type="text" placeholder="Поиск" value="" class="plain buffer">
+                        </form>
+                    </div>
+                    <div class="widget">
+                        <h4>Не знаю возможно тут будет реклама</h4>
+                        <div class="textwidget">
+                            Реклама - это не всегда плохо, порой ты видишь хорошие вещи, которые давно хотел, но не находил, а порой лучше бы не видеть эту рекламу. Но все же лучше реклама в интернете, чем тупые банеры, которые висят по всему городу.
+                        </div><!-- la class="textwidget" è forse generata automaticamente da wp -->
+                    </div>
+                    <div class="widget">
+                        <h4>Рубрики</h4>
+                        <ul class="plain">
+                            <li><a href="#">Мода</a></li>
+                            <li><a href="#">Люди</a></li>
+                            <li><a href="#">Город</a></li>
+                            <li><a href="#">Мир</a></li>
                         </ul>
                     </div>
-            <div class="article-text">
-                      {{ article.content }}
+                </aside>
 
+            </div><!-- post-area -->
 
-                <div id="comments">
-                    <h2>Comments</h2>
-
-                    {% for comment in comments %}
-                        <div class="comment">
-                            <h4>{{ comment.user.username }}</h4>
-                            <p>{{ comment.message }}</p>
-                        </div>
-                    {% endfor %}
-
-                    {% if app.user %}
-                        {{ form_start(form) }}
-                        {{ form_row(form.message) }}
-                        <input type="submit" value="Add Comment" class="btn btn-default">
-                        {{ form_end(form) }}
-                    {% endif %}
-                </div>
+            <div class="meta-social">
+                <ul class="inline center">
+                    <li><a href="#" class="twitter-share border-box"><i class="fa fa-twitter fa-lg"></i></a></li>
+                    <li><a href="#" class="facebook-share border-box"><i class="fa fa-facebook fa-lg"></i></a></li>
+                    <li><a href="#" class="vk-share border-box"><i class="fa fa-vk fa-lg"></i></a></li>
+                </ul>
             </div>
-        </div>
 
+            <div class="related clear-after">
+                <h4>Последнии публикации</h4>
+                {% for article in popularArticles() %}
+                    <div class="item">
+                        <figure><img src="http://lorempixel.com/686/686/cats/" alt=""></figure>
+                        <a class="overlay" href="{{ path('article', {"slug" : article.slug}) }}">
+                            <div class="overlay-content">
+                                <div class="post-type"><i class="icon icon-search"></i></div>
+                                <h2>{{ article.title }}</h2>
+                                <p>Короткие ведомости о том, что ожидает нас в статье...</p>
+                            </div><!-- overlay-content -->
+                        </a><!-- overlay -->
+                    </div>
+                {% endfor %}
+            </div>
 
-    {% endblock content %}
+            <div class="comment-section">
+                <h3 id="comments">2 Комментарии</h3>
+                <ul class="comment-list plain">
+                    <li class="comment">
+                        <div class="single-comment">
+                            <div class="comment-author">
+                                <img src="http://placehold.it/60x60" class="avatar" alt="">
+                                <cite><a href="#">Вадим Брыкля</a></cite>
+                                <span class="says">написал:</span>
+                            </div><!-- comment-author -->
+                            <div class="comment-meta">
+                                <time datetime="2016-02-18 23:47">Февраль 18, 2016 23:47</time> / <a href="#" class="reply">Ответить</a>
+                            </div><!-- comment-meta -->
+                            <p>Первый</p>
+                        </div><!-- single-comment -->
+                        <ul class="children plain">
+                            <li class="comment">
+                                <div class="single-comment">
+                                    <div class="comment-author">
+                                        <img src="http://placehold.it/60x60" class="avatar" alt="">
+                                        <cite><a href="#">Вадим Брыкля</a></cite>
+                                        <span class="says">написал:</span>
+                                    </div><!-- comment-author -->
+                                    <div class="comment-meta">
+                                        <time datetime="2016-02-18 23:50">Февраль 18, 2016 23:47</time> / <a href="#" class="reply">Ответить</a>
+                                    </div><!-- comment-meta -->
+                                    <p>Докатился, пишу самому себе...</p>
+                                </div><!-- single-comment -->
+            </div><!-- comment-section -->
+            <div id="post-comment" class="clear-after">
+                <h3 id="reply-title">Оставьте свой отзыв</h3>
+                <p class="comment-note">Для отправки комментария нужна электронная почта</p>
+                <form class="comment-form">
+                    <span class="pre-input"><i class="icon icon-user"></i></span>
+                    <input class="name plain buffer" type="text" placeholder="Имя">
+                    <span class="pre-input"><i class="icon icon-email"></i></span>
+                    <input class="email plain buffer" type="email" placeholder="Электронная почта">
+                    <textarea class="plain buffer" placeholder=Текст></textarea>
+                    <input class="plain button red" type="submit" value="Отправить">
+                </form>
+            </div><!-- post-comment -->
 
-    {% block sidebar %}
-        <div class="sidebar col col-lg-4">
-                   <div class="latest-posts">
+        </div><!-- row-content -->
+    </div><!-- row -->
+</main><!-- main -->
 
-                       <h2>Most viewed posts</h2>
+<footer role="contentinfo">
+    <div class="row">
+        <div class="row-content buffer clear-after">
+            <section id="top-footer">
+                <div class="widget column three"><!-- widget-->
+                    <h4>Меню</h4>
+                    <ul class="plain">
+                        <li><a href="#">Головна</a></li>
+                        <li><a href="#">Новини</a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#">Контакти</a></li>
+                    </ul>
+                </div>
+                <div class="widget column three">
+                    <h4>Архіви</h4>
+                    <ul class="plain">
+                        <li><a href="#">2016</a></li>
+                        <li><a href="#">2016</a></li>
+                        <li><a href="#">2016</a></li>
+                        <li><a href="#">2016</a></li>
+                        <li><a href="#">2016</a></li>
+                    </ul>
+                </div>
+                <div class="widget meta-social column three">
+                    <h4>Слідкуйте за нами</h4>
+                    <ul class="inline">
+                        <li><a href="#" class="twitter-share border-box"><i class="fa fa-twitter fa-lg"></i></a></li>
+                        <li><a href="#" class="facebook-share border-box"><i class="fa fa-facebook fa-lg"></i></a></li>
+                        <li><a href="#" class="vk-share border-box"><i class="fa fa-vk fa-lg"></i></a></li>
+                    </ul>
+                </div>
+            </section><!-- top-footer -->
+            <section id="bottom-footer">
+                <p class="keep-left">&copy; 2016 <a href="http://vk.com/awaylastdays" alt="AwayLastDays">AwayLastDays</a>. All Rights Reserved.</p>
+            </section><!-- bottom-footer -->
+        </div><!-- row-content -->
+    </div><!-- row -->
+</footer>
 
-                       {% for article in popularArticles() %}
-                           <article>
-                               <div class="thumb-hover" style="background-image: url({{ article.image.path }})"></div>
-                               <div class="post-content">
-                                   <h3><a href="{{ path('article', { "slug" : article.slug }) }}">{{ article.title }}</a>
-                                   </h3>
-                                   <ul class="meta_data">
-                                       <li class="category">
-                                           <a href="{{ path('category', { "slug" : article.categories.slug }) }}" class="c5-meta-cat category-5">
-                                               <span class="fa fa-{{ article.categories.class }}"></span>{{ article.categories.name }}
-                                           </a>
-                                       </li>
-                                       <li class="like">
-                                    <span class="c5-post-like">
-                                        <span class="fa fa-heart-o"></span>
-                                        <span class="count">{{ article.likes|length }}</span>
-                                    </span>
-                                       </li>
-                                   </ul>
-                                   <div class="clearfix"></div>
-                               </div>
-                           </article>
-                       {% endfor %}
-                   </div>
-               </div>
-    {% endblock sidebar %}
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script src="{{ asset('js/plugins.js') }}"></script>
+<script src="{{ asset('js/alpha.js') }}"></script>
 
+</body>
+
+</html>

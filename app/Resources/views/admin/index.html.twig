@@ -13,42 +13,42 @@
 
         <div class="col col-lg-2" id="sidebar">
             <div class="container">
-                <a href="/" id="logo"><img src="{{ asset('img/crystal-white.png') }}" alt="Logo"></a>
+                <a href="{{ path('admin') }}" id="logo"><img src="{{ asset('img/crystal-white.png') }}" alt="Logo"></a>
                 <ul class="admin-menu">
                     <li><a href="#">Новини</a>
                         <ul class="sub-menu">
-                            <li><a href="/admin/article/new">Додати новину</a></li>
-                            <li><a href="/admin/articles/1">Всі новини</a></li>
+                            <li><a href="{{ path('new_article') }}">Додати новину</a></li>
+                            <li><a href="{{ path('admin_articles') }}">Всі новини</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Коментарі</a>
                         <ul class="sub-menu">
-                            <li><a href="/admin/comment/new">Додати коментар</a></li>
-                            <li><a href="/admin/comments/1">Всі коментарі</a></li>
+                            <li><a href="{{ path('new_comment') }}">Додати коментар</a></li>
+                            <li><a href="{{ path('admin_comments') }}">Всі коментарі</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Сторінки</a>
                         <ul class="sub-menu">
-                            <li><a href="/admin/page/new">Додати сторінку</a></li>
-                            <li><a href="/admin/pages/1">Всі сторінки</a></li>
+                            <li><a href="{{ path('new_page') }}">Додати сторінку</a></li>
+                            <li><a href="{{ path('admin_pages') }}">Всі сторінки</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Користувачі</a>
                         <ul class="sub-menu">
-                            <li><a href="/admin/user/new">Додати користувача</a></li>
-                            <li><a href="/admin/users/1">Всі користувачі</a></li>
+                            <li><a href="{{ path('new_user') }}">Додати користувача</a></li>
+                            <li><a href="{{ path('admin_users') }}">Всі користувачі</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Картинки</a>
                         <ul class="sub-menu">
-                            <li><a href="/admin/image/new">Додати картинку</a></li>
-                            <li><a href="/admin/images/1">Всі картинки</a></li>
+                            <li><a href="{{ path('new_image') }}">Додати картинку</a></li>
+                            <li><a href="{{ path('admin_images') }}">Всі картинки</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Категорії</a>
                         <ul class="sub-menu">
-                            <li><a href="/admin/category/new">Додати категорію</a></li>
-                            <li><a href="/admin/categories/1">Всі категорії</a></li>
+                            <li><a href="{{ path('new_category') }}">Додати категорію</a></li>
+                            <li><a href="{{ path('admin_categories') }}">Всі категорії</a></li>
                         </ul>
                     </li>
                 </ul>
