@@ -72,16 +72,28 @@ stof_doctrine_extensions:
             sluggable: true
 
 hwi_oauth:
-    firewall_names:        [secured_area]
+    firewall_name: default
+    connect:
+        confirmation: true
+#        account_connector: oauth_test_provider
     resource_owners:
         facebook:
-            type:          facebook
-            client_id:     1079326288777202
-            client_secret: 50489b6c09b26b56ae183bdb8f3eac09
-            scope:         "email"
+            type:                facebook
+            client_id:           %facebookId%
+            client_secret:       %facebookToken%
+            scope:               "email, public_profile"
+            infos_url:           "https://graph.facebook.com/me?fields=id,name,location,birthday,email,hometown,picture,relationship_status,gender"
             options:
-                display: popup #dialog is optimized for popup window
-                auth_type: rerequest # Re-asking for Declined Permissions
+                display: popup
+        google:
+            type:                google
+            client_id:           %googleId%
+            client_secret:       %googleToken%
+            scope:               "email profile"
+        vkontakte:
+            type:                vkontakte
+            client_id:       %vkontakteId%
+            client_secret:   %vkontakteToken%
 
 services:
     hwi_oauth.user.provider.entity:
