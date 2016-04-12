@@ -18,7 +18,9 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    facebookId:         ~
-    facebookToken:      ~
-    googleId            ~
-    googleToken         ~
+    facebookId: ~
+    facebookToken: ~
+    googleId: ~
+    googleToken: ~
+    vkontakteId: ~
+    vkontakteToken: ~
