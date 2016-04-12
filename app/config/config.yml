@@ -70,3 +70,19 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable: true
+
+hwi_oauth:
+    firewall_names:        [secured_area]
+    resource_owners:
+        facebook:
+            type:          facebook
+            client_id:     1079326288777202
+            client_secret: 50489b6c09b26b56ae183bdb8f3eac09
+            scope:         "email"
+            options:
+                display: popup #dialog is optimized for popup window
+                auth_type: rerequest # Re-asking for Declined Permissions
+
+services:
+    hwi_oauth.user.provider.entity:
+        class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
