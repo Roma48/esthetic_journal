@@ -97,4 +97,7 @@ hwi_oauth:
 
 services:
     hwi_oauth.user.provider.entity:
-        class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
+        class: AppBundle\OAuthUserProvider\OAuthCustomUserProvider
+        arguments:
+            entityManager: "@doctrine.orm.entity_manager"
+            container: "@service_container"

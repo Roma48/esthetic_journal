@@ -26,7 +26,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var String
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=25, unique=true, nullable=true)
      */
     protected $username;
 
@@ -69,7 +69,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var String
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $lastName;
 
@@ -78,6 +78,43 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $age;
+
+    /**
+     * @var String
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $googleId;
+
+    /**
+     * @var String
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $vkontakteId;
+
+    /**
+     * @var String
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $twitterId;
+
+    /**
+     * @var String
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $facebookId;
+
+    /**
+     * @var String
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $avatarPath;
+
+    /**
+     * @var String
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $email;
+
 
 //    /**
 //     * @var
@@ -310,7 +347,101 @@ class User implements UserInterface, \Serializable
         $this->plainPassword = $plainPassword;
     }
 
+    /**
+     * @return String
+     */
+    public function getGoogleId()
+    {
+        return $this->googleId;
+    }
 
+    /**
+     * @param String $googleId
+     */
+    public function setGoogleId($googleId)
+    {
+        $this->googleId = $googleId;
+    }
+
+    /**
+     * @return String
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * @param String $facebookId
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+    }
+
+    /**
+     * @return String
+     */
+    public function getAvatarPath()
+    {
+        return $this->avatarPath;
+    }
+
+    /**
+     * @param String $avatarPath
+     */
+    public function setAvatarPath($avatarPath)
+    {
+        $this->avatarPath = $avatarPath;
+    }
+
+    /**
+     * @return String
+     */
+    public function getVkontakteId()
+    {
+        return $this->vkontakteId;
+    }
+
+    /**
+     * @param String $vkontakteId
+     */
+    public function setVkontakteId($vkontakteId)
+    {
+        $this->vkontakteId = $vkontakteId;
+    }
+
+    /**
+     * @return String
+     */
+    public function getTwitterId()
+    {
+        return $this->twitterId;
+    }
+
+    /**
+     * @param String $twitterId
+     */
+    public function setTwitterId($twitterId)
+    {
+        $this->twitterId = $twitterId;
+    }
+
+    /**
+     * @return String
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param String $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
 
     /** @see \Serializable::serialize() */
     public function serialize()
@@ -335,6 +466,4 @@ class User implements UserInterface, \Serializable
             // $this->salt
             ) = unserialize($serialized);
     }
-
-
 }
