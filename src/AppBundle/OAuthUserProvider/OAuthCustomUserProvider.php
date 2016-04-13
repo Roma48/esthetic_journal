@@ -6,15 +6,8 @@ use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use \HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
-use Symfony\Component\DependencyInjection\Tests\Compiler\C;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\User\UserInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
 
 /**
  * Class OAuthCustomUserProvider
