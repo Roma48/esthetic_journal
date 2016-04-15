@@ -885,13 +885,13 @@ nav ul.sub-menu > li:last-child > a {
     width: 100%;
 }
 
-.blog.masonry-style article.six figure img,
+.blog.masonry-style article.six figure,
 .blog.masonry-style article.six figure .blog-overlay,
-.blog.masonry-style article.eight figure img,
+.blog.masonry-style article.eight figure,
 .blog.masonry-style article.eight figure .blog-overlay,
-.blog-section.masonry-style article.six figure img,
+.blog-section.masonry-style article.six figure,
 .blog-section.masonry-style article.six figure .blog-overlay,
-.blog-section.masonry-style article.eight figure img,
+.blog-section.masonry-style article.eight figure,
 .blog-section.masonry-style article.eight figure .blog-overlay {
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
@@ -926,12 +926,39 @@ nav ul.sub-menu > li:last-child > a {
     border-radius: 1em;
 }
 
-.blog.masonry-style article.three figure img,
-.blog.masonry-style article.four figure img,
-.blog-section.masonry-style article.three figure img,
-.blog-section.masonry-style article.four figure img {
-    width: 100%;
+.blog-section.masonry-style article.three figure,
+.blog-section.masonry-style article.four figure,
+.blog.masonry-style article.three figure {
+    -webkit-border-top-left-radius: 1em;
+    -moz-border-top-left-radius: 1em;
+    -webkit-border-top-right-radius: 1em;
+    -moz-border-top-right-radius: 1em;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
+/*.blog.masonry-style article.three figure img,*/
+/*.blog.masonry-style article.four figure img,*/
+/*.blog-section.masonry-style article.three figure img,*/
+/*.blog-section.masonry-style article.four figure img {*/
+    /*width: 100%;*/
+/*}*/
+
+.blog.masonry-style article.three figure,
+.blog.masonry-style article.four figure,
+.blog-section.masonry-style article.three figure,
+.blog-section.masonry-style article.four figure {
+    height: 200px;
+}
+
+.blog.masonry-style article.six figure,
+.blog.masonry-style article.six figure,
+.blog-section.masonry-style article.six figure {
+    height: 380px;
+}
+
 
 .blog.masonry-style article.three figure img,
 .blog.masonry-style article.three figure .blog-overlay,

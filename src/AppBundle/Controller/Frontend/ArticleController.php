@@ -12,7 +12,7 @@ use AppBundle\Entity\Comment;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/blog/page/{number}", name="blog")
+     * @Route("/blog/{number}", name="blog")
      */
     public function blogAction(Request $request, $number)
     {

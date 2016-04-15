@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityManager;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use \HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class OAuthCustomUserProvider
@@ -21,19 +20,12 @@ class OAuthCustomUserProvider implements OAuthAwareUserProviderInterface
     protected $em;
 
     /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
      * OAuthCustomUserProvider constructor.
      * @param EntityManager $em
-     * @param ContainerInterface $container
      */
-    public function __construct(EntityManager $em, ContainerInterface $container)
+    public function __construct(EntityManager $em)
     {
         $this->em = $em;
-        $this->container = $container;
     }
 
     /**

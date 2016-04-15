@@ -100,4 +100,3 @@ services:
         class: AppBundle\OAuthUserProvider\OAuthCustomUserProvider
         arguments:
             entityManager: "@doctrine.orm.entity_manager"
-            container: "@service_container"

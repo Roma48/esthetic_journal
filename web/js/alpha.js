@@ -463,7 +463,7 @@ jQuery(document).ready(function ($) {
             BlogOverlay.each(function () {
 
                 var $this = $(this),
-                    itemBlogHeight = $this.prev('img').height(),
+                    itemBlogHeight = $this.parents('figure').height(),
                     BlogOverlayIcon = $this.children('i'),
                     BlogOverlayIconHeight = BlogOverlayIcon.height();
 
