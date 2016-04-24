@@ -39,6 +39,20 @@ class Pagination
     }
 
     /**
+     * @param $text
+     * @return Paginator
+     */
+    public function searchArticles($text)
+    {
+        $query = $this->doctrine->getRepository('AppBundle:Article')->searchArticles($text);
+
+        $paginator = new Paginator($query, $fetchJoinCollection = false);
+        $paginator->setUseOutputWalkers(false);
+
+        return $paginator;
+    }
+
+    /**
      * @return \Doctrine\ORM\Tools\Pagination\Paginator
      */
     public function getCategory($slug, $page)

@@ -9,7 +9,7 @@
                     <div class="intro-item" style="background-image: url({{ slide.image.path }});">
                         <div class="caption">
                             <h2>{{ slide.title }}</h2>
-                            <p>{{ slide.description }}</p>
+                            <p>{{ slide.description | raw }}</p>
                             <a class="button white transparent" href="{{ path('article', {"slug": slide.slug}) }}">Читати</a>
                         </div><!-- caption -->
                         {#<div class="photocaption">#}

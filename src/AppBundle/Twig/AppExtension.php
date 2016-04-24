@@ -21,6 +21,9 @@ class AppExtension extends \Twig_Extension
      */
     public function __construct(RegistryInterface $doctrine)
     {
+        /**
+         * @var RegistryInterface
+         */
         $this->doctrine = $doctrine;
     }
 
@@ -30,18 +33,30 @@ class AppExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('popularArticles', [$this, 'popularArticles'])
+            new \Twig_SimpleFunction('lastArticles', [$this, 'lastArticles']),
+            new \Twig_SimpleFunction('categoryList', [$this, 'categoryList'])
         ];
     }
 
     /**
-     * @return \Doctrine\ORM\QueryBuilder
+     * @param $limit
+     * @return mixed
      */
-    public function popularArticles()
+    public function lastArticles($limit)
     {
-        $popular = $this->doctrine->getManager()->getRepository('AppBundle:Article')->popularArticles();
+        $popular = $this->doctrine->getManager()->getRepository('AppBundle:Article')->lastArticles($limit);
 
         return $popular;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function categoryList()
+    {
+        $categories = $this->doctrine->getManager()->getRepository('AppBundle:Category')->findAll();
+
+        return $categories;
     }
 
     /**

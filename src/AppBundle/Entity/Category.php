@@ -14,13 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Category
 {
-
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    use CreateUpdateTrait;
 
     /**
      * @ORM\Column()

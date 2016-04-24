@@ -47,6 +47,8 @@ class CreateAdminCommand extends ContainerAwareCommand
             $admin->setFirstName($firstName);
             $admin->setLastName($lastName);
             $admin->setUsername($username);
+            $admin->setCreatedAt(new \DateTime());
+            $admin->setUpdatedAt(new \DateTime());
 
             $encoder = $this->getContainer()->get('security.password_encoder');
             $password = $encoder->encodePassword($admin, $password);

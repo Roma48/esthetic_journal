@@ -957,6 +957,8 @@ nav ul.sub-menu > li:last-child > a {
 .blog.masonry-style article.six figure,
 .blog-section.masonry-style article.six figure {
     height: 380px;
+    background-size: cover;
+    background-position: center;
 }
 
 
@@ -1158,6 +1160,16 @@ nav ul.sub-menu > li:last-child > a {
 .portfolio-section .overlay {
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
+    border-radius: 1em;
+}
+
+.related figure,
+.related .overlay {
+    width: 295px;
+    height: 295px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     border-radius: 1em;
 }
 

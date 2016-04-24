@@ -26,31 +26,32 @@
 
                 <div class="post-area clear-after">
                     <article role="main" class="column nine">
-                        <h5 class="meta-post"><a href="{{ path('category', {"slug" : article.categories.slug, "page" : 1}) }}">{{ article.categories.name }}</a> - <time datetime="2013-11-09">Февраль 18, 2016</time></h5>
+                        <h5 class="meta-post"><a href="{{ path('category', {"slug" : article.categories.slug, "page" : 1}) }}">{{ article.categories.name }}</a> - <time datetime="{{ article.createdAt.format('d.m.y') }}">{{ article.createdAt.format('d F Y') }}</time></h5>
                         <h1>{{ article.title }}</h1>
-                        <p>{{ article.content }}</p>
+                        <div id="article-content">
+                            {{ article.content | raw }}
+                        </div>
                     </article>
 
                     <aside role="complementary" class="sidebar column three last">
                         <div class="widget widget_search">
-                            <form role="search">
+                            <form role="search" action="{{ path('search') }}" method="get">
                                 <span class="pre-input"><i class="icon icon-search"></i></span>
-                                <input type="text" placeholder="Поиск" value="" class="plain buffer">
+                                <input type="text" placeholder="Поиск" name="text" value="" class="plain buffer">
                             </form>
                         </div>
-                        <div class="widget">
-                            <h4>Не знаю возможно тут будет реклама</h4>
-                            <div class="textwidget">
-                                Реклама - это не всегда плохо, порой ты видишь хорошие вещи, которые давно хотел, но не находил, а порой лучше бы не видеть эту рекламу. Но все же лучше реклама в интернете, чем тупые банеры, которые висят по всему городу.
-                            </div><!-- la class="textwidget" è forse generata automaticamente da wp -->
-                        </div>
+                        {#<div class="widget">#}
+                            {#<h4>Не знаю возможно тут будет реклама</h4>#}
+                            {#<div class="textwidget">#}
+                                {#Реклама - это не всегда плохо, порой ты видишь хорошие вещи, которые давно хотел, но не находил, а порой лучше бы не видеть эту рекламу. Но все же лучше реклама в интернете, чем тупые банеры, которые висят по всему городу.#}
+                            {#</div><!-- la class="textwidget" è forse generata automaticamente da wp -->#}
+                        {#</div>#}
                         <div class="widget">
                             <h4>Рубрики</h4>
                             <ul class="plain">
-                                <li><a href="#">Мода</a></li>
-                                <li><a href="#">Люди</a></li>
-                                <li><a href="#">Город</a></li>
-                                <li><a href="#">Мир</a></li>
+                                {% for category in categoryList() %}
+                                    <li><a href="{{ path('category', {'slug' : category.slug }) }}">{{ category.name }}</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </aside>
@@ -67,9 +68,9 @@
 
                 <div class="related clear-after">
                     <h4>Последнии публикации</h4>
-                    {% for article in popularArticles() %}
+                    {% for article in lastArticles(3) %}
                         <div class="item">
-                            <figure><img src="http://lorempixel.com/686/686/cats/" alt=""></figure>
+                            <figure style="background-image: url({{ article.image.path }})"></figure>
                             <a class="overlay" href="{{ path('article', {"slug" : article.slug}) }}">
                                 <div class="overlay-content">
                                     <div class="post-type"><i class="icon icon-search"></i></div>
@@ -81,55 +82,28 @@
                     {% endfor %}
                 </div>
 
-                {{ dump(app.user) }}
+                <div id="disqus_thread"></div>
+                <script>
+                    /**
+                     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                     */
+                    /*
+                     var disqus_config = function () {
+                     this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                     this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                     };
+                     */
+                    (function() { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
 
-                <div class="comment-section">
-                    <h3 id="comments">2 Комментарии</h3>
-                    <ul class="comment-list plain">
-                        <li class="comment">
-                            <div class="single-comment">
-                                <div class="comment-author">
-                                    <img src="http://placehold.it/60x60" class="avatar" alt="">
-                                    <cite><a href="#">Вадим Брыкля</a></cite>
-                                    <span class="says">написал:</span>
-                                </div><!-- comment-author -->
-                                <div class="comment-meta">
-                                    <time datetime="2016-02-18 23:47">Февраль 18, 2016 23:47</time> / <a href="#" class="reply">Ответить</a>
-                                </div><!-- comment-meta -->
-                                <p>Первый</p>
-                            </div><!-- single-comment -->
-                            <ul class="children plain">
-                                <li class="comment">
-                                    <div class="single-comment">
-                                        <div class="comment-author">
-                                            <img src="http://placehold.it/60x60" class="avatar" alt="">
-                                            <cite><a href="#">Вадим Брыкля</a></cite>
-                                            <span class="says">написал:</span>
-                                        </div><!-- comment-author -->
-                                        <div class="comment-meta">
-                                            <time datetime="2016-02-18 23:50">Февраль 18, 2016 23:47</time> / <a href="#" class="reply">Ответить</a>
-                                        </div><!-- comment-meta -->
-                                        <p>Докатился, пишу самому себе...</p>
-                                    </div><!-- single-comment -->
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!-- comment-section -->
-                {% if app.user %}
-                <div id="post-comment" class="clear-after">
-                    <h3 id="reply-title">Оставьте свой отзыв</h3>
-                    <p class="comment-note">Для отправки комментария нужна электронная почта</p>
-                    <form class="comment-form">
-                        <span class="pre-input"><i class="icon icon-user"></i></span>
-                        <input class="name plain buffer" type="text" placeholder="Имя">
-                        <span class="pre-input"><i class="icon icon-email"></i></span>
-                        <input class="email plain buffer" type="email" placeholder="Электронная почта">
-                        <textarea class="plain buffer" placeholder=Текст></textarea>
-                        <input class="plain button red" type="submit" value="Отправить">
-                    </form>
-                </div><!-- post-comment -->
-                {% endif %}
+                        s.src = '//estheticjournal.disqus.com/embed.js';
+
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
             </div><!-- row-content -->
         </div><!-- row -->
     </main><!-- main -->

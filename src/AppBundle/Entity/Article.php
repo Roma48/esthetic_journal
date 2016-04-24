@@ -14,13 +14,7 @@ use AppBundle\Entity\Image;
  */
 class Article
 {
-
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    use CreateUpdateTrait;
 
     /**
      * @ORM\Column(type="string")
@@ -54,21 +48,9 @@ class Article
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
-     */
-    protected $comments;
-
-    /**
-     * @var
      * @ORM\ManyToOne(targetEntity="User", inversedBy="article")
      */
     protected $users;
-
-    /**
-     * @var
-     * @ORM\OneToMany(targetEntity="Like", mappedBy="article")
-     */
-    protected $likes;
 
     /**
      * @var
@@ -81,13 +63,6 @@ class Article
      * @ORM\ManyToOne(targetEntity="Image", inversedBy="article", cascade={"persist"})
      */
     protected $image;
-
-
-    public function __construct()
-    {
-        $this->likes = new ArrayCollection();
-        $this->comments = new ArrayCollection();
-    }
 
     /**
      * @return mixed
@@ -200,52 +175,6 @@ class Article
     public function setCategories($categories)
     {
         $this->categories = $categories;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    /**
-     * @param Comment $comment
-     * @return $this
-     */
-    public function addComment(Comment $comment)
-    {
-        $comment->setArticle($this);
-        $this->comments->add($comment);
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLikes()
-    {
-        return $this->likes;
-    }
-
-    /**
-     * @param Like $likes
-     * @return $this
-     */
-    public function addLike(Like $likes)
-    {
-        $likes->setArticle($this);
-        $this->likes->add($likes);
-        return $this;
-    }
-
-    /**
-     * @param Like $likes
-     */
-    public function removeLike(Like $likes)
-    {
-        $this->likes->removeElement($likes);
     }
 
     /**

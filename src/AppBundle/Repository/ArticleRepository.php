@@ -1,7 +1,10 @@
 <?php
+
 namespace AppBundle\Repository;
+
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * Class ArticleRepository
  * @package AppBundle\Repository
@@ -16,12 +19,10 @@ class ArticleRepository extends EntityRepository
     {
         $limit = 9;
         $query = $this->createQueryBuilder('t')
-            ->select('t, image, category, user, comments, likes')
+            ->select('t, image, category, user')
             ->leftJoin('t.image', 'image')
             ->leftJoin('t.categories', 'category')
             ->leftJoin('t.users', 'user')
-            ->leftJoin('t.likes', 'likes')
-            ->leftJoin('t.comments', 'comments')
             ->groupBy('t.id')
             ->setMaxResults($limit)
             ->setFirstResult($page * $limit - $limit)
@@ -36,15 +37,12 @@ class ArticleRepository extends EntityRepository
     public function getSlides()
     {
         $query = $this->createQueryBuilder('a')
-            ->select('a, image, category, user, comments')
+            ->select('a, image, category, user')
             ->leftJoin('a.image', 'image')
             ->leftJoin('a.categories', 'category')
             ->leftJoin('a.users', 'user')
-            ->leftJoin('a.comments', 'comments')
-            ->join('a.likes', 'likes')
             ->groupBy('a.id')
             ->setMaxResults(3)
-//            ->orderBy('cnt', 'DESC')
             ->getQuery()
             ->getResult();
 
@@ -60,12 +58,10 @@ class ArticleRepository extends EntityRepository
     {
         $limit = 9;
         $query = $this->createQueryBuilder('t')
-            ->select('t, image, category, user, comments, likes')
+            ->select('t, image, category, user')
             ->leftJoin('t.image', 'image')
             ->leftJoin('t.categories', 'category')
             ->leftJoin('t.users', 'user')
-            ->leftJoin('t.likes', 'likes')
-            ->leftJoin('t.comments', 'comments')
             ->where('category.slug = ?1')
             ->setParameter(1, $slug)
             ->groupBy('t.id')
@@ -79,19 +75,38 @@ class ArticleRepository extends EntityRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function popularArticles()
+    public function lastArticles($limit)
     {
-        $limit = 5;
         $query = $this->createQueryBuilder('p')
-            ->select('p, image, category, likes, comments, user')
+            ->select('p, image, category, user')
             ->leftJoin('p.image', 'image')
             ->leftJoin('p.categories', 'category')
-            ->leftJoin('p.likes', 'likes')
-            ->leftJoin('p.comments', 'comments')
             ->leftJoin('p.users', 'user')
-            ->orderBy('p.views', 'DESC')
             ->groupBy('p.id')
             ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $query;
+    }
+
+    /**
+     * @param $text
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function searchArticles($text)
+    {
+        $query = $this->createQueryBuilder('a');
+        $query->select('a, image, category, user')
+            ->leftJoin('a.image', 'image')
+            ->leftJoin('a.categories', 'category')
+            ->leftJoin('a.users', 'user')
+            ->groupBy('a.id')
+            ->where($query->expr()->like('a.title', ':text'))
+            ->orWhere($query->expr()->like('a.content', ':text'))
+            ->orWhere($query->expr()->like('a.description', ':text'))
+            ->setParameter('text', '%' . $text . '%')
             ->getQuery()
             ->getResult()
         ;

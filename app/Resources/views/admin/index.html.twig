@@ -5,7 +5,7 @@
     <title>{% block title %}{{ title }}{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/admin-styles.css') }}">
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
@@ -21,30 +21,30 @@
                             <li><a href="{{ path('admin_articles') }}">Всі новини</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Коментарі</a>
-                        <ul class="sub-menu">
-                            <li><a href="{{ path('new_comment') }}">Додати коментар</a></li>
-                            <li><a href="{{ path('admin_comments') }}">Всі коментарі</a></li>
-                        </ul>
-                    </li>
+                    {#<li><a href="#">Коментарі</a>#}
+                        {#<ul class="sub-menu">#}
+                            {#<li><a href="{{ path('new_comment') }}">Додати коментар</a></li>#}
+                            {#<li><a href="{{ path('admin_comments') }}">Всі коментарі</a></li>#}
+                        {#</ul>#}
+                    {#</li>#}
                     <li><a href="#">Сторінки</a>
                         <ul class="sub-menu">
                             <li><a href="{{ path('new_page') }}">Додати сторінку</a></li>
                             <li><a href="{{ path('admin_pages') }}">Всі сторінки</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Користувачі</a>
-                        <ul class="sub-menu">
-                            <li><a href="{{ path('new_user') }}">Додати користувача</a></li>
-                            <li><a href="{{ path('admin_users') }}">Всі користувачі</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Картинки</a>
-                        <ul class="sub-menu">
-                            <li><a href="{{ path('new_image') }}">Додати картинку</a></li>
-                            <li><a href="{{ path('admin_images') }}">Всі картинки</a></li>
-                        </ul>
-                    </li>
+                    {#<li><a href="#">Користувачі</a>#}
+                        {#<ul class="sub-menu">#}
+                            {#<li><a href="{{ path('new_user') }}">Додати користувача</a></li>#}
+                            {#<li><a href="{{ path('admin_users') }}">Всі користувачі</a></li>#}
+                        {#</ul>#}
+                    {#</li>#}
+                    {#<li><a href="#">Картинки</a>#}
+                        {#<ul class="sub-menu">#}
+                            {#<li><a href="{{ path('new_image') }}">Додати картинку</a></li>#}
+                            {#<li><a href="{{ path('admin_images') }}">Всі картинки</a></li>#}
+                        {#</ul>#}
+                    {#</li>#}
                     <li><a href="#">Категорії</a>
                         <ul class="sub-menu">
                             <li><a href="{{ path('new_category') }}">Додати категорію</a></li>

@@ -2,10 +2,24 @@
 
 {% block content %}
     <h1>{{ title }}</h1>
-
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <input type="submit" value="{{ button }}" class="btn btn-default">
     {{ form_end(form) }}
-
 {% endblock content %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('js/ckeditor/config.js') }}"></script>
+    <script>
+        if (document.getElementById("article_description") && document.getElementById("article_content") ) {
+            CKEDITOR.replace( 'article_description' );
+            CKEDITOR.replace( 'article_content' );
+        }
+
+        if (document.getElementById("page_content") ) {
+            CKEDITOR.replace( 'page_content' );
+        }
+    </script>
+{% endblock javascript %}

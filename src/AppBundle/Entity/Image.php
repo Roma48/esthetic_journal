@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 use AppBundle\Entity\Article;
 
 /**
@@ -16,13 +17,7 @@ use AppBundle\Entity\Article;
  */
 class Image
 {
-    /**
-     * @var Integer
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    use CreateUpdateTrait;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -109,6 +104,7 @@ class Image
     {
         return $this->file;
     }
+
     /**
      * @ORM\PostPersist()
      * @ORM\PostUpdate()
@@ -141,8 +137,8 @@ class Image
     public function preUpload()
     {
         if (null !== $this->getFile()) {
-            $filename = sha1(uniqid(mt_rand(), true));
-            $this->path = $filename . '.' . $this->getFile()->guessExtension();
+            $filename = $this->getFile()->getClientOriginalName();
+            $this->path = '/uploads/' . $filename;
         }
     }
     /**
@@ -209,6 +205,4 @@ class Image
     {
         $this->temp = $temp;
     }
-
-
 }

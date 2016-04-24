@@ -31,46 +31,6 @@ class Role implements RoleInterface
      */
     protected $role;
 
-//    /**
-//     * @var ArrayCollection
-//     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="roles")
-//     */
-//    protected $users;
-//
-//    /**
-//     * Role constructor.
-//     */
-//    public function __construct()
-//    {
-//        $this->users = new ArrayCollection();
-//    }
-
-//    /**
-//     * @return ArrayCollection
-//     */
-//    public function getUsers()
-//    {
-//        return $this->users;
-//    }
-//
-//    /**
-//     * @param User $user
-//     * @return $this
-//     */
-//    public function addUser(User $user)
-//    {
-//        $this->users->add($user);
-//
-//        return $this;
-//    }
-//
-//    public function removeUser(User $user)
-//    {
-//        $this->users->remove($user);
-//
-//        return $this;
-//    }
-
     /**
      * @return int
      */

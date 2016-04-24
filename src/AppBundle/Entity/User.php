@@ -16,13 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, \Serializable
 {
-    /**
-     * @var Integer
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    use CreateUpdateTrait;
 
     /**
      * @var String
@@ -115,24 +109,11 @@ class User implements UserInterface, \Serializable
      */
     protected $email;
 
-
-//    /**
-//     * @var
-//     * @ORM\Column(type="datetime", nullable=true)
-//     */
-//    protected $birthDay;
-
     /**
      * @var
      * @ORM\OneToMany(targetEntity="Article", mappedBy="users")
      */
     protected $article;
-
-    /**
-     * @var
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Like", mappedBy="user")
-     */
-    protected $like;
 
     /**
      * @return int
@@ -214,22 +195,6 @@ class User implements UserInterface, \Serializable
         $this->age = $age;
     }
 
-//    /**
-//     * @return mixed
-//     */
-//    public function getBirthDay()
-//    {
-//        return $this->birthDay;
-//    }
-//
-//    /**
-//     * @param mixed $birthDay
-//     */
-//    public function setBirthDay($birthDay)
-//    {
-//        $this->birthDay = $birthDay;
-//    }
-
     /**
      * @return mixed
      */
@@ -244,22 +209,6 @@ class User implements UserInterface, \Serializable
     public function setArticle($article)
     {
         $this->article = $article;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLike()
-    {
-        return $this->like;
-    }
-
-    /**
-     * @param mixed $like
-     */
-    public function setLike($like)
-    {
-        $this->like = $like;
     }
 
     /**
