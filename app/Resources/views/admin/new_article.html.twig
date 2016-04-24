@@ -11,15 +11,19 @@
 {% block javascript %}
     {{ parent() }}
     <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('js/ckfinder/ckfinder.js') }}"></script>
     <script src="{{ asset('js/ckeditor/config.js') }}"></script>
     <script>
         if (document.getElementById("article_description") && document.getElementById("article_content") ) {
-            CKEDITOR.replace( 'article_description' );
-            CKEDITOR.replace( 'article_content' );
+            var editor1 = CKEDITOR.replace( 'article_description' );
+            var editor2 = CKEDITOR.replace( 'article_content' );
+            CKFinder.setupCKEditor(editor1);
+            CKFinder.setupCKEditor(editor2);
         }
 
         if (document.getElementById("page_content") ) {
-            CKEDITOR.replace( 'page_content' );
+            var editor = CKEDITOR.replace( 'page_content' );
+            CKFinder.setupCKEditor(editor);
         }
     </script>
 {% endblock javascript %}
