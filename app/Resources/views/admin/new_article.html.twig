@@ -17,6 +17,7 @@
         if (document.getElementById("article_description") && document.getElementById("article_content") ) {
             var editor1 = CKEDITOR.replace( 'article_description' );
             var editor2 = CKEDITOR.replace( 'article_content' );
+            editor2.config.height = 600;
             CKFinder.setupCKEditor(editor1);
             CKFinder.setupCKEditor(editor2);
         }
