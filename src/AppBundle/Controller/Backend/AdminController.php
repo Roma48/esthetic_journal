@@ -98,14 +98,18 @@ class AdminController extends Controller
      */
     public function editArticleAction(Request $request, Article $article)
     {
-        $form = $this->createForm(ArticleType::class, $article);
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(new ArticleType($em), $article);
 
         $buttonName = 'Зберегти';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
+                foreach ($article->getSlides() as $slide){
+                    $article->addSlide($slide);
+                }
                 $em->persist($article);
                 $em->flush();
                 return $this->redirectToRoute('admin_articles', ['page' => 1]);
