@@ -6,7 +6,7 @@
     <main role="main">
         <div id="intro-wrap" class="full-height">
             <div id="intro" class="preload darken more-button">
-                <div class="intro-item" style="background-image: url({{ article.image.path }});">
+                <div class="intro-item" style="background-image: url({{ article.image }});">
                     {#<div class="photocaption">#}
                         {#<h4>Photography by <a href="vk.com/awaylastdays">Vadim Bryklia</a></h4>#}
                     {#</div><!-- photocaption -->#}
@@ -26,7 +26,7 @@
 
                 <div class="post-area clear-after">
                     <article role="main" class="column nine">
-                        <h5 class="meta-post"><a href="{{ path('category', {"slug" : article.categories.slug, "page" : 1}) }}">{{ article.categories.name }}</a> - <time datetime="{{ article.createdAt.format('d.m.y') }}">{{ article.createdAt.format('d F Y') }}</time></h5>
+                        {#<h5 class="meta-post"><a href="{{ path('category', {"slug" : article.categories.slug, "page" : 1}) }}">{{ article.categories.name }}</a> - <time datetime="{{ article.createdAt.format('d.m.y') }}">{{ article.createdAt.format('d F Y') }}</time></h5>#}
                         <h1>{{ article.title }}</h1>
                         <div id="article-content">
                             {{ article.content | raw }}
@@ -81,12 +81,12 @@
                     <h4>Последнии публикации</h4>
                     {% for article in lastArticles(3) %}
                         <div class="item">
-                            <figure style="background-image: url({{ article.image.path }})"></figure>
+                            <figure style="background-image: url({{ article.image }})"></figure>
                             <a class="overlay" href="{{ path('article', {"slug" : article.slug}) }}">
                                 <div class="overlay-content">
                                     <div class="post-type"><i class="icon icon-search"></i></div>
                                     <h2>{{ article.title }}</h2>
-                                    <p>Короткие ведомости о том, что ожидает нас в статье...</p>
+                                    <p>{{ article.description | striptags }}</p>
                                 </div><!-- overlay-content -->
                             </a><!-- overlay -->
                         </div>

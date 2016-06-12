@@ -1,12 +1,15 @@
 <?php
+
 namespace AppBundle\Repository;
+
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
- * Class ArticleRepository
+ * Class SlideRepository
  * @package AppBundle\Repository
  */
-class ImageRepository extends EntityRepository
+class SlideRepository extends EntityRepository
 {
     /**
      * @param int $page

@@ -15,6 +15,7 @@ use AppBundle\Form\CommentType;
 use AppBundle\Form\ImageType;
 use AppBundle\Form\PageType;
 use AppBundle\Form\UserType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -61,16 +62,21 @@ class AdminController extends Controller
      */
     public function newArticleAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $article = new Article();
 
-        $form = $this->createForm(ArticleType::class, $article);
+        $form = $this->createForm(new ArticleType($em), $article);
 
         $buttonName = 'Додати новину';
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
+                $article->setUsers($this->getUser());
+                foreach ($article->getSlides() as $slide){
+                    $article->addSlide($slide);
+                }
                 $em->persist($article);
                 $em->flush();
                 return $this->redirectToRoute('admin_articles', ['page' => 1]);
@@ -87,11 +93,10 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/article/{id}/edit", name="edit_article")
+     * @ParamConverter("article", class="AppBundle:Article", options={"id" = "id"})
      */
-    public function editArticleAction(Request $request, $id)
+    public function editArticleAction(Request $request, Article $article)
     {
-        $article = $this->getDoctrine()->getRepository('AppBundle:Article')->findOneBy(['id' => $id]);
-
         $form = $this->createForm(ArticleType::class, $article);
 
         $buttonName = 'Зберегти';

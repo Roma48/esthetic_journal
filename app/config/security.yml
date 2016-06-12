@@ -29,7 +29,7 @@ security:
                     facebook:           "/login/check-facebook"
                     google:             "/login/check-google"
                     vkontakte:          "/login/check-vkontakte"
-                login_path:        /
+                login_path:        /admin
                 use_forward:       false
                 failure_path:      /
                 oauth_user_provider:

@@ -19,8 +19,8 @@ class ArticleRepository extends EntityRepository
     {
         $limit = 9;
         $query = $this->createQueryBuilder('t')
-            ->select('t, image, category, user')
-            ->leftJoin('t.image', 'image')
+            ->select('t, category, user')
+//            ->leftJoin('t.image', 'image')
             ->leftJoin('t.categories', 'category')
             ->leftJoin('t.users', 'user')
             ->groupBy('t.id')
@@ -37,8 +37,8 @@ class ArticleRepository extends EntityRepository
     public function getSlides()
     {
         $query = $this->createQueryBuilder('a')
-            ->select('a, image, category, user')
-            ->leftJoin('a.image', 'image')
+            ->select('a, category, user')
+//            ->leftJoin('a.slides', 'slides')
             ->leftJoin('a.categories', 'category')
             ->leftJoin('a.users', 'user')
             ->groupBy('a.id')
@@ -58,8 +58,8 @@ class ArticleRepository extends EntityRepository
     {
         $limit = 9;
         $query = $this->createQueryBuilder('t')
-            ->select('t, image, category, user')
-            ->leftJoin('t.image', 'image')
+            ->select('t, category, user')
+//            ->leftJoin('t.image', 'image')
             ->leftJoin('t.categories', 'category')
             ->leftJoin('t.users', 'user')
             ->where('category.slug = ?1')
@@ -78,8 +78,8 @@ class ArticleRepository extends EntityRepository
     public function lastArticles($limit)
     {
         $query = $this->createQueryBuilder('p')
-            ->select('p, image, category, user')
-            ->leftJoin('p.image', 'image')
+            ->select('p, category, user')
+//            ->leftJoin('p.image', 'image')
             ->leftJoin('p.categories', 'category')
             ->leftJoin('p.users', 'user')
             ->groupBy('p.id')
@@ -98,7 +98,7 @@ class ArticleRepository extends EntityRepository
     public function searchArticles($text)
     {
         $query = $this->createQueryBuilder('a');
-        $query->select('a, image, category, user')
+        $query->select('a, category, user')
             ->leftJoin('a.image', 'image')
             ->leftJoin('a.categories', 'category')
             ->leftJoin('a.users', 'user')

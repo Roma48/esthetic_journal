@@ -1,3 +1,0 @@
-AppBundle\Entity\Image:
-  image_{1..20}:
-    path: <imageUrl(1500, 500, 'cats')>

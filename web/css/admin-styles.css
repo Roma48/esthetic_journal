@@ -9002,3 +9002,23 @@ h6 {
 .admin form > div > div {
     margin-bottom: 20px;
 }
+
+.admin ul.slides {
+    padding: 0;
+}
+
+.admin ul.slides li {
+    list-style: none;
+    border: 1px solid silver;
+    border-radius: 5px;
+    padding: 10px 10px 20px;
+    margin-bottom: 10px;
+}
+
+.admin ul.slides li:last-child {
+    border: none;
+}
+
+.admin ul.slides li a.remove {
+    margin-top: 10px;
+}

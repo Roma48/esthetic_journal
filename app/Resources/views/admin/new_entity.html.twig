@@ -3,24 +3,13 @@
 {% block content %}
     <h1>{{ title }}</h1>
     {{ form_start(form, {'attr' : {'id': 'form_article'}}) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.file) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.content) }}
-    {{ form_label(form.slides) }}
     <ul class="slides" data-prototype="{{ form_widget(form.slides.vars.prototype)|e('html_attr') }}">
-        {% if form.slides %}
-            {% for slide in form.slides %}
-                <li>
-                    {{ form_widget(slide) }}
-                    <a href="#" class="btn btn-danger remove">Видалити слайд</a>
-                </li>
-            {% endfor %}
-        {% else %}
-            {{ form_widget(form.slides) }}
-        {% endif %}
+        {% for slide in form.slides %}
+            <li>{{ form_row(slide.title) }}</li>
+            <li>{{ form_row(slide.description) }}</li>
+            <li>{{ form_row(slide.file) }}</li>
+        {% endfor %}
     </ul>
-    {{ form_row(form.categories) }}
     {{ form_widget(form) }}
     <input type="submit" value="{{ button }}" class="btn btn-default" id="{{ form.vars.id }}">
     {{ form_end(form) }}
@@ -48,7 +37,7 @@
         var $collectionHolder;
 
         // setup an "add a tag" link
-        var $addSlideLink = $('<a href="#" class="add_slide_link btn btn-default">Додати слайд</a>');
+        var $addSlideLink = $('<a href="#" class="add_slide_link btn btn-default">Add a slide</a>');
         var $newLinkLi = $('<li></li>').append($addSlideLink);
 
         function addSlideForm($collectionHolder, $newLinkLi) {
@@ -68,30 +57,9 @@
             // Display the form in the page in an li, before the "Add a tag" link li
             var $newFormLi = $('<li></li>').append(newForm);
             $newLinkLi.before($newFormLi);
-            addSlideFormDeleteLink($newFormLi);
-        }
-
-        function addSlideFormDeleteLink($slideFormLi) {
-            var $removeFormA = $('<a href="#" class="btn btn-danger remove">Видалити слайд</a>');
-            $slideFormLi.append($removeFormA);
-
-            $removeFormA.on('click', function(e) {
-                // prevent the link from creating a "#" on the URL
-                e.preventDefault();
-
-                // remove the li for the tag form
-                $slideFormLi.remove();
-            });
         }
 
         jQuery(document).ready(function() {
-            jQuery('li a.remove').on('click', function(e) {
-                // prevent the link from creating a "#" on the URL
-                e.preventDefault();
-
-                // remove the li for the tag form
-                jQuery(this).parent().remove();
-            });
             // Get the ul that holds the collection of tags
             $collectionHolder = $('ul.slides');
 
@@ -110,5 +78,54 @@
                 addSlideForm($collectionHolder, $newLinkLi);
             });
         });
+
+        {#(function($){#}
+            {#var file;#}
+            {#$('input#article_file').on('change', function(e){#}
+                {#file = e.target.files[0];#}
+            {#});#}
+
+            {#$('input#article').click(function(e){#}
+                {#e.preventDefault();#}
+
+                {#var article = {#}
+                    {#"article": {#}
+                        {#"title": $('#article_title').val(),#}
+                        {#"description": editor1.getData(),#}
+                        {#"content": editor2.getData(),#}
+                        {#"categories": $('#article_categories').val(),#}
+                        {#"users": {{ app.user.id }}#}
+                    {#}#}
+                {#};#}
+
+                {#$.ajax({#}
+                    {#url: Routing.generate("ajax_new_article"),#}
+                    {#data: JSON.stringify(article),#}
+                    {#processData: false,#}
+                    {#contentType: false,#}
+                    {#type: "POST",#}
+                    {#success: function(data){#}
+                        {#console.log(data);#}
+
+                        {#$.ajax({#}
+                            {#url: Routing.generate("ajax_article_add_image", {id: data.aid}),#}
+                            {#data: file,#}
+                            {#processData: false,#}
+                            {#contentType: false,#}
+                            {#type: "POST",#}
+                            {#success: function(data){#}
+                                {#console.log(data);#}
+                            {#},#}
+                            {#error: function(error){#}
+                                {#console.log(error);#}
+                            {#}#}
+                        {#});#}
+                    {#},#}
+                    {#error: function(error){#}
+                        {#console.log(error);#}
+                    {#}#}
+                {#});#}
+            {#});#}
+        {#})(jQuery);#}
     </script>
 {% endblock javascript %}

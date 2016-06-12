@@ -46,12 +46,6 @@ class Category
      */
     protected $articles;
 
-    /**
-     * @var
-     * @ORM\ManyToOne(targetEntity="Image", inversedBy="category", cascade={"persist"})
-     */
-    protected $image;
-
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -130,24 +124,6 @@ class Category
     public function removeArticle(Article $article)
     {
         $this->articles->remove($article);
-        return $this;
-    }
-
-    /**
-     * @return String
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param Image $image
-     * @return $this
-     */
-    public function setImage(Image $image)
-    {
-        $this->image = $image;
         return $this;
     }
 

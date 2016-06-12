@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,6 +23,10 @@ class ArticleType extends AbstractType
                 'label' => 'Заголовок',
                 'attr' => ['class' => 'form-control']
             ])
+            ->add("file", FileType::class, [
+                'label' => 'Картинка',
+                'attr' => ['class' => 'form-control']
+            ])
             ->add("description", TextareaType::class, [
                 'label' => 'Опис',
                 'attr' => ['class' => 'form-control']
@@ -29,8 +35,11 @@ class ArticleType extends AbstractType
                 'label' => 'Повна версія',
                 'attr' => ['class' => 'form-control']
             ])
-            ->add("image", ImageType::class, [
-                'label' => ' '
+            ->add("slides", CollectionType::class, [
+                'entry_type' => SlideType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'label' => "Слайди"
             ])
             ->add("categories", EntityType::class, [
                 'choice_label' => 'name',
@@ -38,12 +47,12 @@ class ArticleType extends AbstractType
                 'class' => 'AppBundle\Entity\Category',
                 'label' => 'Категорія'
             ])
-            ->add("users", EntityType::class, [
-                'choice_label' => 'firstName',
-                'attr' => ['class' => 'form-control'],
-                'class' => 'AppBundle\Entity\User',
-                'label' => 'Користувач'
-            ])
+//            ->add("users", EntityType::class, [
+//                'choice_label' => 'firstName',
+//                'attr' => ['class' => 'form-control'],
+//                'class' => 'AppBundle\Entity\User',
+//                'label' => 'Користувач'
+//            ])
         ;
     }
     public function configureOptions(OptionsResolver $resolver)

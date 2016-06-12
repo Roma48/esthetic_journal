@@ -12,17 +12,20 @@ hwi_oauth_connect:
     resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
     prefix:   /connect
 
-facebook_login:
-    path: /login/check-facebook
-
-google_login:
-    path: /login/check-google
-
-vkontakte_login:
-    path: /login/check-vkontakte
+#facebook_login:
+#    path: /login/check-facebook
+#
+#google_login:
+#    path: /login/check-google
+#
+#vkontakte_login:
+#    path: /login/check-vkontakte
 #
 #custom_login:
 #    path: /login/check-custom
 #
 #github_login:
 #    path: /login/check-github
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

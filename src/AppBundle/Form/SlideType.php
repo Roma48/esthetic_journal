@@ -2,45 +2,54 @@
 
 namespace AppBundle\Form;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CategoryType extends AbstractType
+/**
+ * Class SlideType
+ * @package AppBundle\Form
+ */
+class SlideType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("name", TextType::class, [
-                'label' => 'Назва',
+            ->add("title", TextType::class, [
+                'label' => 'Заголовок',
                 'attr' => ['class' => 'form-control']
             ])
-            ->add("description", TextareaType::class, [
+            ->add("description", TextType::class, [
                 'label' => 'Опис',
                 'attr' => ['class' => 'form-control']
             ])
-            ->add("class", TextType::class, [
-                'label' => 'Css class',
+            ->add("file", null, [
+                'label' => 'Картинка',
                 'attr' => ['class' => 'form-control']
             ])
-//            ->add("", SlideType::class, [
-//                'label' => ' '
-//            ])
         ;
     }
+
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\Category'
+            'data_class' => 'AppBundle\Entity\Slide'
         ]);
     }
+
+    /**
+     * @return string
+     */
     public function getName()
     {
-        return 'category';
+        return 'slide';
     }
 }

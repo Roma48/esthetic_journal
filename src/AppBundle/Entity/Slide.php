@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,15 +10,27 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use AppBundle\Entity\Article;
 
 /**
- * Class Image
+ * Class Slide
  * @package AppBundle\Entity
- * @ORM\Table(name="images")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageRepository")
+ * @ORM\Table(name="slides")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SlideRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Image
+class Slide
 {
     use CreateUpdateTrait;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     */
+    protected $title;
+
+    /**
+     * @var
+     * @ORM\Column(type="text")
+     */
+    protected $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -33,15 +46,41 @@ class Image
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="image", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="id", cascade={"persist", "remove"})
      */
     protected $article;
 
     /**
-     * @var
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="image", cascade={"persist"})
+     * @return mixed
      */
-    protected $category;
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
     /**
      * @return null|string
@@ -204,5 +243,21 @@ class Image
     public function setTemp($temp)
     {
         $this->temp = $temp;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    /**
+     * @param \AppBundle\Entity\Article $article
+     */
+    public function setArticle(Article $article)
+    {
+        $this->article = $article;
     }
 }
