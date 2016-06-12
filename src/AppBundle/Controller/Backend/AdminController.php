@@ -15,6 +15,7 @@ use AppBundle\Form\CommentType;
 use AppBundle\Form\ImageType;
 use AppBundle\Form\PageType;
 use AppBundle\Form\UserType;
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -117,6 +118,21 @@ class AdminController extends Controller
             'form' => $form->createView(),
             'button' => $buttonName
         ));
+    }
+
+    /**
+     * @Route("/admin/article/{id}/delete", name="delete_article")
+     * @ParamConverter("article", class="AppBundle:Article", options={"id" = "id"})
+     */
+    public function deleteArticleAction(Request $request, Article $article)
+    {
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($article);
+        $em->flush();
+
+        return $this->redirectToRoute("admin_articles");
     }
 
     /**
@@ -292,7 +308,7 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('admin/new_article.html.twig', array(
+        return $this->render('admin/new_entity.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'title' => 'Нова категорія',
             'form' => $form->createView(),
@@ -321,7 +337,7 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('admin/new_article.html.twig', array(
+        return $this->render('admin/new_entity.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'title' => 'Редагувати категорію',
             'form' => $form->createView(),
@@ -440,7 +456,7 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('admin/new_article.html.twig', array(
+        return $this->render('admin/new_entity.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'title' => 'Нова сторінка',
             'form' => $form->createView(),
@@ -469,7 +485,7 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('admin/new_article.html.twig', array(
+        return $this->render('admin/new_entity.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'title' => 'Редагувати сторінку',
             'form' => $form->createView(),

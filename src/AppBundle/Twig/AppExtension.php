@@ -2,6 +2,7 @@
 
 namespace AppBundle\Twig;
 
+use AppBundle\Entity\Article;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -34,7 +35,8 @@ class AppExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('lastArticles', [$this, 'lastArticles']),
-            new \Twig_SimpleFunction('categoryList', [$this, 'categoryList'])
+            new \Twig_SimpleFunction('categoryList', [$this, 'categoryList']),
+            new \Twig_SimpleFunction('replaceBodySlider', [$this, 'replaceBodySlider'])
         ];
     }
 
@@ -57,6 +59,29 @@ class AppExtension extends \Twig_Extension
         $categories = $this->doctrine->getManager()->getRepository('AppBundle:Category')->findAll();
 
         return $categories;
+    }
+
+    /**
+     * @param $article
+     * @return mixed
+     */
+    public function replaceBodySlider(Article $article)
+    {
+        $body = $article->getContent();
+
+        $slider = '<div class="gallery slider" data-autoplay="false" data-autoheight="true">';
+        $slider .= '<figure>';
+
+        foreach ($article->getSlides() as $slide){
+            $slider .= '<div><img src="' . $slide->getPath() . '" alt="' . $slide->getTitle() . '"></div>';
+        }
+
+        $slider .= '</figure>';
+        $slider .= '</div>';
+
+        $body = str_replace('[slider]', $slider, $body);
+
+        return $body;
     }
 
     /**

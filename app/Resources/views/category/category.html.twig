@@ -10,7 +10,7 @@
                     <div class="inner">
                         {#<div class="img" style="background-image: url('{{ asset('uploads/') }}{{ article.image.path }}')"></div>#}
                         {# FOR FIXTURES #}
-                        <div class="img" style="background-image: url('{{ article.image.path }}')"></div>
+                        <div class="img" style="background-image: url('{{ article.image }}')"></div>
                         {# FOR FIXTURES #}
                         <div class="inner-text">
                             <a class="category" href="{{ path("category", { "slug" : article.categories.slug}, true) }}/1">
@@ -28,15 +28,15 @@
                                             <span class="fa fa-user"></span>{{ article.users.firstName }}
                                         </a>
                                     </li>
-                                    <li class="comment">
-                                        <a href="/"><span class="fa fa-comment-o"></span>{{ article.comments|length }}</a>
-                                    </li>
-                                    <li class="like">
-                                            <span class="post-like">
-                                                <span class="fa fa-heart-o"></span>
-                                                <span class="count">{{ article.likes|length }}</span>
-                                            </span>
-                                    </li>
+                                    {#<li class="comment">#}
+                                        {#<a href="/"><span class="fa fa-comment-o"></span>{{ article.comments|length }}</a>#}
+                                    {#</li>#}
+                                    {#<li class="like">#}
+                                            {#<span class="post-like">#}
+                                                {#<span class="fa fa-heart-o"></span>#}
+                                                {#<span class="count">{{ article.likes|length }}</span>#}
+                                            {#</span>#}
+                                    {#</li>#}
                                 </ul>
                             </div>
                         </div>

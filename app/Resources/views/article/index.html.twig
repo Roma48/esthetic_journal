@@ -26,10 +26,10 @@
 
                 <div class="post-area clear-after">
                     <article role="main" class="column nine">
-                        {#<h5 class="meta-post"><a href="{{ path('category', {"slug" : article.categories.slug, "page" : 1}) }}">{{ article.categories.name }}</a> - <time datetime="{{ article.createdAt.format('d.m.y') }}">{{ article.createdAt.format('d F Y') }}</time></h5>#}
+                        <h5 class="meta-post"><a href="{{ path('category', {"slug" : article.categories.slug, "page" : 1}) }}">{{ article.categories.name }}</a> - <time datetime="{{ article.createdAt.format('d.m.y') }}">{{ article.createdAt.format('d F Y') }}</time></h5>
                         <h1>{{ article.title }}</h1>
                         <div id="article-content">
-                            {{ article.content | raw }}
+                            {{ replaceBodySlider(article) | raw }}
                         </div>
                     </article>
 

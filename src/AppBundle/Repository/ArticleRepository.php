@@ -20,10 +20,11 @@ class ArticleRepository extends EntityRepository
         $limit = 9;
         $query = $this->createQueryBuilder('t')
             ->select('t, category, user')
-//            ->leftJoin('t.image', 'image')
+            ->leftJoin('t.slides', 'slides')
             ->leftJoin('t.categories', 'category')
             ->leftJoin('t.users', 'user')
             ->groupBy('t.id')
+            ->addOrderBy('t.id', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($page * $limit - $limit)
         ;
@@ -38,7 +39,7 @@ class ArticleRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('a')
             ->select('a, category, user')
-//            ->leftJoin('a.slides', 'slides')
+            ->leftJoin('a.slides', 'slides')
             ->leftJoin('a.categories', 'category')
             ->leftJoin('a.users', 'user')
             ->groupBy('a.id')
@@ -99,7 +100,6 @@ class ArticleRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('a');
         $query->select('a, category, user')
-            ->leftJoin('a.image', 'image')
             ->leftJoin('a.categories', 'category')
             ->leftJoin('a.users', 'user')
             ->groupBy('a.id')

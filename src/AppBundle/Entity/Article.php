@@ -55,7 +55,7 @@ class Article
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="Slide", mappedBy="article", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Slide", mappedBy="article", cascade={"persist", "remove"})
      */
     protected $slides;
 
@@ -190,7 +190,7 @@ class Article
      */
     public function removeUpload()
     {
-        if (isset($this->temp)) {
+        if (isset($this->temp) && isset($this->image)) {
             unlink($this->temp);
         }
     }

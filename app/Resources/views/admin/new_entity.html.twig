@@ -3,13 +3,6 @@
 {% block content %}
     <h1>{{ title }}</h1>
     {{ form_start(form, {'attr' : {'id': 'form_article'}}) }}
-    <ul class="slides" data-prototype="{{ form_widget(form.slides.vars.prototype)|e('html_attr') }}">
-        {% for slide in form.slides %}
-            <li>{{ form_row(slide.title) }}</li>
-            <li>{{ form_row(slide.description) }}</li>
-            <li>{{ form_row(slide.file) }}</li>
-        {% endfor %}
-    </ul>
     {{ form_widget(form) }}
     <input type="submit" value="{{ button }}" class="btn btn-default" id="{{ form.vars.id }}">
     {{ form_end(form) }}

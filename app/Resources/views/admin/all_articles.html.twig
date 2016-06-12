@@ -6,7 +6,7 @@
     <table class="table table-hover">
         <thead>
         <th>#</th>
-        <th>Заголовок</th>
+        <th width="80%">Заголовок</th>
         <th>Опції</th>
         </thead>
         <tbody>
@@ -16,7 +16,7 @@
                 <td>{{ article.title }}</td>
                 <td>
                     <a href="{{ path('edit_article', {"id": article.id}) }}" class="btn btn-default">Редагувати</a>
-                    {#<a href="/admin/article/{{ article.id }}/delete" class="btn btn-danger">Delete</a>#}
+                    <a href="{{ path('delete_article', {"id": article.id}) }}" class="btn btn-danger">Видалити</a>
                 </td>
             </tr>
         {% endfor %}

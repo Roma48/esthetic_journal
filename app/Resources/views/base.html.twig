@@ -35,35 +35,35 @@
                     <ul class="reset" role="navigation">
                         <li class="menu-item">
                             <a href="{{ path('homepage') }}">Головна</a>
-                            <ul class="sub-menu">
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                            </ul>
+                            {#<ul class="sub-menu">#}
+                                {#<li><a href="#">1</a></li>#}
+                                {#<li><a href="#">2</a></li>#}
+                                {#<li><a href="#">3</a></li>#}
+                            {#</ul>#}
                         </li>
                         <li class="menu-item">
                             <a href="{{ path('blog', {"number" : 1}) }}">Новини</a>
-                            <ul class="sub-menu">
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">6</a></li>
-                            </ul>
+                            {#<ul class="sub-menu">#}
+                                {#<li><a href="#">1</a></li>#}
+                                {#<li><a href="#">2</a></li>#}
+                                {#<li><a href="#">3</a></li>#}
+                                {#<li><a href="#">4</a></li>#}
+                                {#<li><a href="#">5</a></li>#}
+                                {#<li><a href="#">6</a></li>#}
+                            {#</ul>#}
                         </li>
                         <li class="menu-item">
                             <a href="#">Відео</a>
-                            <ul class="sub-menu">
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                            </ul>
+                            {#<ul class="sub-menu">#}
+                                {#<li><a href="#">1</a></li>#}
+                                {#<li><a href="#">2</a></li>#}
+                                {#<li><a href="#">3</a></li>#}
+                                {#<li><a href="#">4</a></li>#}
+                            {#</ul>#}
                         </li>
                         <li class="menu-item"><a href="#">Про нас</a></li>
-                        <li class="menu-item"><a href="#">Пошук</a></li>
-                        <li class="menu-item"><a href="#">Контакти</a></li>
+                        {#<li class="menu-item"><a href="#">Пошук</a></li>#}
+                        <li class="menu-item"><a href="{{ path('page', {'slug': 'contacts'}) }}">Контакти</a></li>
                     </ul>
                 </nav>
             </div><!-- row-content -->
