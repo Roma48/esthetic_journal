@@ -5219,4 +5219,19 @@ footer .row-content.buffer {
         -webkit-text-size-adjust: none;
     }
 }
-      
+
+.login-title {
+    text-align: center;
+    margin-top: 100px;
+}
+
+#login-form {
+    width: 460px;
+    margin: 100px auto 240px;
+}
+
+#login-form input[type=text],
+#login-form input[type=password] {
+    width: 100%;
+    max-width: 100%;
+}

@@ -53,7 +53,7 @@
                             {#</ul>#}
                         </li>
                         <li class="menu-item">
-                            <a href="#">Відео</a>
+                            <a href="{{ path('page', {'slug': 'video'}) }}">Відео</a>
                             {#<ul class="sub-menu">#}
                                 {#<li><a href="#">1</a></li>#}
                                 {#<li><a href="#">2</a></li>#}
@@ -61,7 +61,7 @@
                                 {#<li><a href="#">4</a></li>#}
                             {#</ul>#}
                         </li>
-                        <li class="menu-item"><a href="#">Про нас</a></li>
+                        <li class="menu-item"><a href="{{ path('page', {'slug': 'about-us'}) }}">Про нас</a></li>
                         {#<li class="menu-item"><a href="#">Пошук</a></li>#}
                         <li class="menu-item"><a href="{{ path('page', {'slug': 'contacts'}) }}">Контакти</a></li>
                     </ul>

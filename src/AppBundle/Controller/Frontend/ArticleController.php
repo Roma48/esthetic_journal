@@ -53,7 +53,7 @@ class ArticleController extends Controller
         $articles = $this->get('app.pagination')->searchArticles($text);
 //        $articles = $this->getDoctrine()->getRepository('AppBundle:Article')->searchArticles($text);
 
-        return $this->render('article/blog.html.twig', array(
+        return $this->render('article/search.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'class' => 'search',
             'title' => 'Search',
