@@ -1,0 +1,13 @@
+{% extends 'admin/index.html.twig' %}
+
+    {% block content %}
+        <h1>{{ title }}</h1>
+        {{ form_start(form, {'attr' : {'id': 'form_menu'}}) }}
+        <div>
+            {{ form_widget(form) }}
+        </div>
+        <input type="submit" value="Додати" class="btn btn-default" id="{{ form.vars.id }}">
+        {{ form_end(form) }}
+    {% endblock content %}
+
+

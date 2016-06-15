@@ -3,6 +3,7 @@
 namespace AppBundle\Twig;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\MenuItem;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -36,6 +37,7 @@ class AppExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('lastArticles', [$this, 'lastArticles']),
             new \Twig_SimpleFunction('categoryList', [$this, 'categoryList']),
+            new \Twig_SimpleFunction('renderMenu', [$this, 'renderMenu']),
             new \Twig_SimpleFunction('replaceBodySlider', [$this, 'replaceBodySlider'])
         ];
     }
@@ -82,6 +84,68 @@ class AppExtension extends \Twig_Extension
         $body = str_replace('[slider]', $slider, $body);
 
         return $body;
+    }
+
+    /**
+     * @return array
+     */
+    public function sortingMenu()
+    {
+        $menuItems = $this->doctrine->getManager()->getRepository('AppBundle:MenuItem')->findAll();
+        $sortedMenu = [];
+        foreach ($menuItems as $menuItem){
+            if (!$menuItem->getParent()){
+                $sortedMenu[] = [
+                    'url' => $menuItem->getUrl(),
+                    'title' => $menuItem->getTitle(),
+                    'childs' => $this->getChilds($menuItem)
+                ];
+            }
+        }
+
+        return $sortedMenu;
+    }
+
+    /**
+     * @param MenuItem $menuItem
+     * @return array
+     */
+    public function getChilds(MenuItem $menuItem)
+    {
+        $childs = $menuItem->getChilds();
+        $arr = [];
+        if ($childs){
+            foreach ($childs as $child){
+                $arr[] = [
+                    'url' => $menuItem->getUrl(),
+                    'title' => $menuItem->getTitle()
+                ];
+            }
+        }
+
+        return $arr;
+    }
+
+    public function renderMenu(){
+        $sortedMenu = $this->sortingMenu();
+        $output = '<ul class="reset" role="navigation">';
+        foreach ($sortedMenu as $menuItem){
+            $output .= '<li class="menu-item">';
+            $output .= '<a href="' . $menuItem['url'] . '">' . $menuItem['title'] . '</a>';
+            if ($menuItem['childs']){
+                $output .= '<ul class="sub-menu">';
+                foreach ($menuItem['childs'] as $child){
+                    $output .= '<li>';
+                    $output .= '<a href="' . $child['url'] . '">' . $child['title'] . '</a>';
+                    $output .= '</li>';
+                }
+                $output .= '</ul>';
+            }
+            $output .= '</li>';
+        }
+        $output .= '</ul>';
+
+        return $output;
     }
 
     /**

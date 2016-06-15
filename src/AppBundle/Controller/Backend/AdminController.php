@@ -6,6 +6,7 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Image;
+use AppBundle\Entity\MenuItem;
 use AppBundle\Entity\Page;
 use AppBundle\Entity\User;
 use AppBundle\Form\AdminCommentType;
@@ -13,6 +14,7 @@ use AppBundle\Form\ArticleType;
 use AppBundle\Form\CategoryType;
 use AppBundle\Form\CommentType;
 use AppBundle\Form\ImageType;
+use AppBundle\Form\MenuItemType;
 use AppBundle\Form\PageType;
 use AppBundle\Form\UserType;
 use Doctrine\ORM\EntityManager;
@@ -510,6 +512,38 @@ class AdminController extends Controller
             'pages' => $pages,
             'pagination' => (int) count($pages)/9,
             'current' => $page
+        ));
+    }
+
+    /**
+     * @Route("/admin/menu", name="admin_menu")
+     */
+    public function editMenuAction(Request $request)
+    {
+        $menuItem = new MenuItem();
+
+        $form = $this->createForm(new MenuItemType(), $menuItem);
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                if ($menuItem->getParent()){
+                    $menuItem->setParent($menuItem->getParent()->getId());
+                    $parent = $this->getDoctrine()->getRepository('AppBundle:MenuItem')->findOneBy(['id' => $menuItem->getParent()]);
+                    $parent->setChilds($menuItem);
+                    $em->persist($parent);
+                }
+                $em->persist($menuItem);
+                $em->flush();
+                return $this->redirectToRoute('admin_menu');
+            }
+        }
+
+        return $this->render('admin/menu.html.twig', array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'title' => 'Меню',
+            'form' => $form->createView()
         ));
     }
 }

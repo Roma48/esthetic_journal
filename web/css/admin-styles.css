@@ -8957,7 +8957,7 @@ h6 {
     margin: 0;
     list-style: none;
     background: #32373c;
-    display: none;
+    /*display: none;*/
 }
 .admin #sidebar .container ul.admin-menu > li ul.sub-menu li a {
     display: block;

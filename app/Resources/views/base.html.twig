@@ -32,39 +32,40 @@
                 </div><!-- brand -->
                 <a id="menu-toggle" href="#"><i class="fa fa-bars fa-lg"></i></a>
                 <nav>
-                    <ul class="reset" role="navigation">
-                        <li class="menu-item">
-                            <a href="{{ path('homepage') }}">Головна</a>
-                            {#<ul class="sub-menu">#}
-                                {#<li><a href="#">1</a></li>#}
-                                {#<li><a href="#">2</a></li>#}
-                                {#<li><a href="#">3</a></li>#}
-                            {#</ul>#}
-                        </li>
-                        <li class="menu-item">
-                            <a href="{{ path('blog', {"number" : 1}) }}">Новини</a>
-                            {#<ul class="sub-menu">#}
-                                {#<li><a href="#">1</a></li>#}
-                                {#<li><a href="#">2</a></li>#}
-                                {#<li><a href="#">3</a></li>#}
-                                {#<li><a href="#">4</a></li>#}
-                                {#<li><a href="#">5</a></li>#}
-                                {#<li><a href="#">6</a></li>#}
-                            {#</ul>#}
-                        </li>
-                        <li class="menu-item">
-                            <a href="{{ path('page', {'slug': 'video'}) }}">Відео</a>
-                            {#<ul class="sub-menu">#}
-                                {#<li><a href="#">1</a></li>#}
-                                {#<li><a href="#">2</a></li>#}
-                                {#<li><a href="#">3</a></li>#}
-                                {#<li><a href="#">4</a></li>#}
-                            {#</ul>#}
-                        </li>
-                        <li class="menu-item"><a href="{{ path('page', {'slug': 'about-us'}) }}">Про нас</a></li>
-                        {#<li class="menu-item"><a href="#">Пошук</a></li>#}
-                        <li class="menu-item"><a href="{{ path('page', {'slug': 'contacts'}) }}">Контакти</a></li>
-                    </ul>
+                    {{ renderMenu() | raw }}
+                    {#<ul class="reset" role="navigation">#}
+                        {#<li class="menu-item">#}
+                            {#<a href="{{ path('homepage') }}">Головна</a>#}
+                            {#&#123;&#35;<ul class="sub-menu">&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">1</a></li>&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">2</a></li>&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">3</a></li>&#35;&#125;#}
+                            {#&#123;&#35;</ul>&#35;&#125;#}
+                        {#</li>#}
+                        {#<li class="menu-item">#}
+                            {#<a href="{{ path('blog', {"number" : 1}) }}">Новини</a>#}
+                            {#&#123;&#35;<ul class="sub-menu">&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">1</a></li>&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">2</a></li>&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">3</a></li>&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">4</a></li>&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">5</a></li>&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">6</a></li>&#35;&#125;#}
+                            {#&#123;&#35;</ul>&#35;&#125;#}
+                        {#</li>#}
+                        {#<li class="menu-item">#}
+                            {#<a href="{{ path('page', {'slug': 'video'}) }}">Відео</a>#}
+                            {#&#123;&#35;<ul class="sub-menu">&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">1</a></li>&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">2</a></li>&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">3</a></li>&#35;&#125;#}
+                                {#&#123;&#35;<li><a href="#">4</a></li>&#35;&#125;#}
+                            {#&#123;&#35;</ul>&#35;&#125;#}
+                        {#</li>#}
+                        {#<li class="menu-item"><a href="{{ path('page', {'slug': 'about-us'}) }}">Про нас</a></li>#}
+                        {#&#123;&#35;<li class="menu-item"><a href="#">Пошук</a></li>&#35;&#125;#}
+                        {#<li class="menu-item"><a href="{{ path('page', {'slug': 'contacts'}) }}">Контакти</a></li>#}
+                    {#</ul>#}
                 </nav>
             </div><!-- row-content -->
         </div><!-- row -->
