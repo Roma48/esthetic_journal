@@ -39,7 +39,9 @@
                                         <div class="blog-excerpt-inner">
                                             <h5 class="meta-post">{{ article.categories.name }}</h5>
                                             <h2>{{ article.title }}</h2>
-                                            {#<p>{{ article.description | striptags }}</p>#}
+                                            {% if loop.index != 1 and loop.index != 4 and loop.index != 9 %}
+                                            <p>{{ article.description | striptags }}</p>
+                                            {% endif %}
                                         </div><!-- blog-excerpt-inner -->
                                     </div><!-- blog-excerpt -->
                                 </a>

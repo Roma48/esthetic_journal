@@ -20,20 +20,16 @@
         {#{{  dump(articles) }}#}
         <div id="main" class="row">
             <div class="row-content buffer clear-after">
-                {#<ul class="inline cats filter-options">#}
-                    {#<li data-group="Рубрика">Рубрика</li>#}
-                    {#<li data-group="Рубрика">Рубрика</li>#}
-                    {#<li data-group="Рубрика">Рубрика</li>#}
-                    {#<li data-group="Рубрика">Рубрика</li>#}
-                    {#<li data-group="Рубрика">Рубрика</li>#}
-                    {#<li data-group="Рубрика">Рубрика</li>#}
-                    {#<li data-group="Рубрика">Рубрика</li>#}
-                {#</ul>#}
+                <ul class="inline cats filter-options">
+                    {% for category in categoryList() %}
+                        <li data-group="{{ category.name }}">{{ category.name }}</li>
+                    {% endfor %}
+                </ul>
                 <div class="grid-items preload">
 
                     {% for article in articles %}
-                        <article
-                                class="item column {% if loop.index == 1 or loop.index == 4 or loop.index == 9 %} six {% else %} three {% endif %}">
+                        <article data-groups=["{{ article.categories.name }}"]
+                                class="shuffle-item item column {% if loop.index == 1 or loop.index == 4 or loop.index == 9 %} six {% else %} three {% endif %}">
                             <a href="{{ path('article', {"slug" : article.slug}) }}">
                                 <figure style="background-image: url({{ article.image }})">
                                         <span class="blog-overlay">
@@ -44,7 +40,9 @@
                                     <div class="blog-excerpt-inner">
                                         <h5 class="meta-post">{{ article.categories.name }}</h5>
                                         <h2>{{ article.title }}</h2>
-                                        <p></p>
+                                        {% if loop.index != 1 and loop.index != 4 and loop.index != 9 %}
+                                            <p>{{ article.description | striptags }}</p>
+                                        {% endif %}
                                     </div><!-- blog-excerpt-inner -->
                                 </div><!-- blog-excerpt -->
                             </a>

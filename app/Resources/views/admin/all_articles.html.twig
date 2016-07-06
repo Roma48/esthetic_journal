@@ -15,6 +15,7 @@
                 <td>{{ article.id }}</td>
                 <td>{{ article.title }}</td>
                 <td>
+                    <a href="{{ path('article', {"slug": article.slug}) }}" class="btn btn-default">View</a>
                     <a href="{{ path('edit_article', {"id": article.id}) }}" class="btn btn-default">Редагувати</a>
                     <a href="{{ path('delete_article', {"id": article.id}) }}" class="btn btn-danger">Видалити</a>
                 </td>
