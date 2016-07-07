@@ -27,11 +27,6 @@ class MenuItem
     protected $parent;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $childs;
-
-    /**
      * @var String
      * @Assert\NotBlank(message="Поле обовязкове")
      * @ORM\Column(type="string", nullable=false)
@@ -68,34 +63,6 @@ class MenuItem
     public function setParent($parent)
     {
         $this->parent = $parent;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getChilds()
-    {
-        $childs = json_decode($this->childs);
-
-        return $childs;
-    }
-
-    /**
-     * @param MenuItem $childs
-     */
-    public function setChilds(MenuItem $childs)
-    {
-        $existsChilds = $this->getChilds();
-
-        $childItem = [
-            'id' => $childs->getId(),
-            'url' => $childs->getUrl(),
-            'title' => $childs->getTitle()
-        ];
-
-        $existsChilds[] = $childItem;
-
-        $this->childs = json_encode($existsChilds);
     }
 
     /**

@@ -125,14 +125,16 @@ class AppExtension extends \Twig_Extension
      */
     public function getChilds(MenuItem $menuItem)
     {
-        $childs = $menuItem->getChilds();
+        $childs = $this->doctrine->getManager()->getRepository('AppBundle:MenuItem')->findBy(['parent' => $menuItem->getId()]);
+
         $arr = [];
         if ($childs){
             foreach ($childs as $child){
                 $arr[] = [
-                    'id' => $child->id,
-                    'url' => $child->url,
-                    'title' => $child->title
+                    'id' => $child->getId(),
+                    'url' => $child->getUrl(),
+                    'title' => $child->getTitle(),
+                    'childs' => $this->getChilds($child)
                 ];
             }
         }
@@ -156,22 +158,35 @@ class AppExtension extends \Twig_Extension
             $output .= ' <a href="' . $this->generator->generate('admin_menu_delete', array('id' => $menuItem['id'])) . '" class="btn btn-danger">Видалити</a>';
             $output .= '</td>';
             $output .= '</tr>';
+
             if ($menuItem['childs']){
-                foreach ($menuItem['childs'] as $child){
-                    $output .= '<tr class="child-menu-item">';
-                    $output .= '<td width="60%">';
-                    $output .= $child['title'];
-                    $output .= '</td>';
-                    $output .= '<td>';
-                    $output .= '<a href="' . $this->generator->generate('admin_menu_edit', array('id' => $child['id'])) . '" class="btn btn-default">Редагувати</a> ';
-                    $output .= ' <a href="' . $this->generator->generate('admin_menu_delete', array('id' => $child['id'])) . '" class="btn btn-danger">Видалити</a>';
-                    $output .= '</td>';
-                    $output .= '</tr>';
-                }
+                $output .= $this->renderAdminChilds($menuItem['childs']);
             }
             $output .= '</tr>';
         }
         $output .= '</table>';
+
+        return $output;
+    }
+
+    public function renderAdminChilds($childs)
+    {
+        $output = '';
+        foreach ($childs as $child){
+            $output .= '<tr class="child-menu-item">';
+            $output .= '<td width="60%">';
+            $output .= $child['title'];
+            $output .= '</td>';
+            $output .= '<td>';
+            $output .= '<a href="' . $this->generator->generate('admin_menu_edit', array('id' => $child['id'])) . '" class="btn btn-default">Редагувати</a> ';
+            $output .= ' <a href="' . $this->generator->generate('admin_menu_delete', array('id' => $child['id'])) . '" class="btn btn-danger">Видалити</a>';
+            $output .= '</td>';
+            $output .= '</tr>';
+
+            if ($child['childs']) {
+                $output .= $this->renderAdminChilds($child['childs']);
+            }
+        }
 
         return $output;
     }

@@ -486,11 +486,6 @@ class AdminController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 if ($menuItem->getParent()){
                     $menuItem->setParent($menuItem->getParent()->getId());
-                    $em->persist($menuItem);
-                    $em->flush();
-                    $parent = $this->getDoctrine()->getRepository('AppBundle:MenuItem')->findOneBy(['id' => $menuItem->getParent()]);
-                    $parent->setChilds($menuItem);
-                    $em->persist($parent);
                 }
                 $em->persist($menuItem);
                 $em->flush();
@@ -509,7 +504,7 @@ class AdminController extends Controller
      * @Route("/admin/menu/{id}/edit", name="admin_menu_edit")
      * @ParamConverter("menuItem", class="AppBundle:MenuItem", options={"id" = "id"})
      */
-    public function editMenuAction(Request $request, $menuItem)
+    public function editMenuAction(Request $request, MenuItem $menuItem)
     {
         $form = $this->createForm(new MenuItemType(), $menuItem);
 
@@ -518,14 +513,7 @@ class AdminController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 if ($menuItem->getParent()){
-                    $menuItem->setParent($menuItem->getParent());
-                    echo "<pre>";
-                    var_dump($menuItem);
-                    echo "</pre>";
-                    exit;
-                    $parent = $this->getDoctrine()->getRepository('AppBundle:MenuItem')->findOneBy(['id' => $menuItem->getParent()]);
-                    $parent->setChilds($menuItem);
-                    $em->persist($parent);
+                    $menuItem->setParent($menuItem->getParent()->getId());
                 }
                 $em->persist($menuItem);
                 $em->flush();
