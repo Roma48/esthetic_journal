@@ -88,6 +88,7 @@ class MenuItem
         $existsChilds = $this->getChilds();
 
         $childItem = [
+            'id' => $childs->getId(),
             'url' => $childs->getUrl(),
             'title' => $childs->getTitle()
         ];

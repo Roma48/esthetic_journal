@@ -12,6 +12,7 @@
         <service id="app.twig_extension" class="AppBundle\Twig\AppExtension">
             <tag name="twig.extension" />
             <argument key="doctrine" type="service" id="doctrine"/>
+            <argument key="generator" type="service" id="router"/>
         </service>
 
     </services>

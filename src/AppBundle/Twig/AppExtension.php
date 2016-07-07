@@ -5,6 +5,7 @@ namespace AppBundle\Twig;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\MenuItem;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class AppExtension
@@ -18,15 +19,25 @@ class AppExtension extends \Twig_Extension
     protected $doctrine;
 
     /**
+     * @var UrlGeneratorInterface
+     */
+    private $generator;
+
+    /**
      * AppExtension constructor.
      * @param RegistryInterface $doctrine
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(RegistryInterface $doctrine, UrlGeneratorInterface $generator)
     {
         /**
          * @var RegistryInterface
          */
         $this->doctrine = $doctrine;
+
+        /**
+         * @var UrlGeneratorInterface
+         */
+        $this->generator = $generator;
     }
 
     /**
@@ -38,6 +49,7 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFunction('lastArticles', [$this, 'lastArticles']),
             new \Twig_SimpleFunction('categoryList', [$this, 'categoryList']),
             new \Twig_SimpleFunction('renderMenu', [$this, 'renderMenu']),
+            new \Twig_SimpleFunction('renderAdminMenu', [$this, 'renderAdminMenu']),
             new \Twig_SimpleFunction('replaceBodySlider', [$this, 'replaceBodySlider'])
         ];
     }
@@ -96,6 +108,7 @@ class AppExtension extends \Twig_Extension
         foreach ($menuItems as $menuItem){
             if (!$menuItem->getParent()){
                 $sortedMenu[] = [
+                    'id' => $menuItem->getId(),
                     'url' => $menuItem->getUrl(),
                     'title' => $menuItem->getTitle(),
                     'childs' => $this->getChilds($menuItem)
@@ -117,13 +130,50 @@ class AppExtension extends \Twig_Extension
         if ($childs){
             foreach ($childs as $child){
                 $arr[] = [
-                    'url' => $menuItem->getUrl(),
-                    'title' => $menuItem->getTitle()
+                    'id' => $child->id,
+                    'url' => $child->url,
+                    'title' => $child->title
                 ];
             }
         }
 
         return $arr;
+    }
+
+    /**
+     * @return string
+     */
+    public function renderAdminMenu(){
+        $sortedMenu = $this->sortingMenu();
+        $output = '<table class="table table-hover">';
+        foreach ($sortedMenu as $menuItem){
+            $output .= '<tr class="menu-item">';
+            $output .= '<td width="60%">';
+            $output .= $menuItem['title'];
+            $output .= '</td>';
+            $output .= '<td>';
+            $output .= '<a href="' . $this->generator->generate('admin_menu_edit', array('id' => $menuItem['id'])) . '" class="btn btn-default">Редагувати</a> ';
+            $output .= ' <a href="' . $this->generator->generate('admin_menu_delete', array('id' => $menuItem['id'])) . '" class="btn btn-danger">Видалити</a>';
+            $output .= '</td>';
+            $output .= '</tr>';
+            if ($menuItem['childs']){
+                foreach ($menuItem['childs'] as $child){
+                    $output .= '<tr class="child-menu-item">';
+                    $output .= '<td width="60%">';
+                    $output .= $child['title'];
+                    $output .= '</td>';
+                    $output .= '<td>';
+                    $output .= '<a href="' . $this->generator->generate('admin_menu_edit', array('id' => $child['id'])) . '" class="btn btn-default">Редагувати</a> ';
+                    $output .= ' <a href="' . $this->generator->generate('admin_menu_delete', array('id' => $child['id'])) . '" class="btn btn-danger">Видалити</a>';
+                    $output .= '</td>';
+                    $output .= '</tr>';
+                }
+            }
+            $output .= '</tr>';
+        }
+        $output .= '</table>';
+
+        return $output;
     }
 
     public function renderMenu(){

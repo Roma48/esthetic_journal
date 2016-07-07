@@ -21,7 +21,7 @@ class CategoryController extends Controller
         return $this->render('category/category.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'class' => 'homepage',
-            'title' => $category->getName(),
+            'category' => $category,
             'articles' => $articles,
             'current' => 1
         ));

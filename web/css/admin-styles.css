@@ -8919,6 +8919,7 @@ h6 {
     background: #23282d;
     padding-top: 40px;
     position: fixed;
+    max-width: 400px;
 }
 .admin #sidebar .container {
     max-width: 100%;
@@ -9021,4 +9022,13 @@ h6 {
 
 .admin ul.slides li a.remove {
     margin-top: 10px;
+}
+
+.admin .child-menu-item td:first-child {
+    padding-left: 40px;
+}
+
+.admin .child-menu-item td,
+.admin .menu-item td {
+    vertical-align: middle;
 }

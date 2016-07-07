@@ -72,32 +72,32 @@ stof_doctrine_extensions:
             sluggable: true
             timestampable: true
 
-hwi_oauth:
-    firewall_name: default
-    connect:
-        confirmation: true
-#        account_connector: oauth_test_provider
-    resource_owners:
-        facebook:
-            type:                facebook
-            client_id:           %facebookId%
-            client_secret:       %facebookToken%
-            scope:               "email, public_profile"
-            infos_url:           "https://graph.facebook.com/me?fields=id,name,location,birthday,email,hometown,picture,relationship_status,gender"
-            options:
-                display: popup
-        google:
-            type:                google
-            client_id:           %googleId%
-            client_secret:       %googleToken%
-            scope:               "email profile"
-        vkontakte:
-            type:                vkontakte
-            client_id:       %vkontakteId%
-            client_secret:   %vkontakteToken%
+#hwi_oauth:
+#    firewall_name: default
+#    connect:
+#        confirmation: true
+##        account_connector: oauth_test_provider
+#    resource_owners:
+#        facebook:
+#            type:                facebook
+#            client_id:           %facebookId%
+#            client_secret:       %facebookToken%
+#            scope:               "email, public_profile"
+#            infos_url:           "https://graph.facebook.com/me?fields=id,name,location,birthday,email,hometown,picture,relationship_status,gender"
+#            options:
+#                display: popup
+#        google:
+#            type:                google
+#            client_id:           %googleId%
+#            client_secret:       %googleToken%
+#            scope:               "email profile"
+#        vkontakte:
+#            type:                vkontakte
+#            client_id:       %vkontakteId%
+#            client_secret:   %vkontakteToken%
 
-services:
-    hwi_oauth.user.provider.entity:
-        class: AppBundle\OAuthUserProvider\OAuthCustomUserProvider
-        arguments:
-            entityManager: "@doctrine.orm.entity_manager"
+#services:
+#    hwi_oauth.user.provider.entity:
+#        class: AppBundle\OAuthUserProvider\OAuthCustomUserProvider
+#        arguments:
+#            entityManager: "@doctrine.orm.entity_manager"

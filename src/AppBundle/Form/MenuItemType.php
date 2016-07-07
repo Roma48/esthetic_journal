@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\MenuItem;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,13 +25,11 @@ class MenuItemType extends AbstractType
             ])
             ->add("parent", EntityType::class, [
                 'class' => 'AppBundle\Entity\MenuItem',
-                'choice_label' => function(MenuItem $menuItem){
-                    if (!$menuItem->getParent()){
-                        return $menuItem->getTitle();
-                    } else {
-                        return '-- ' . $menuItem->getTitle();
-                    }
+                'query_builder' => function(EntityRepository $em){
+                    return $em->createQueryBuilder('m')
+                        ->where('m.parent IS NULL');
                 },
+                'choice_label' => 'title',
                 'placeholder' => ' ',
                 'label' => 'Parent',
                 'attr' => ['class' => 'form-control'],

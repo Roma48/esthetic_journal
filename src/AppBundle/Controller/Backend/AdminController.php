@@ -352,6 +352,21 @@ class AdminController extends Controller
     }
 
     /**
+     * @Route("/admin/category/{id}/delete", name="delete_category")
+     * @ParamConverter("category", class="AppBundle:Category", options={"id" = "id"})
+     */
+    public function deleteCategoryAction(Request $request, Category $category)
+    {
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($category);
+        $em->flush();
+
+        return $this->redirectToRoute("admin_categories");
+    }
+
+    /**
      * @Route("/admin/categories/{page}", name="admin_categories")
      */
     public function categoriesPageAction(Request $request, $page = 1)
@@ -363,80 +378,6 @@ class AdminController extends Controller
             'title' => 'Всі категорії',
             'categories' => $categories,
             'pages' => (int) count($categories)/9,
-            'current' => $page
-        ));
-    }
-
-    /**
-     * @Route("/admin/comment/new", name="new_comment")
-     */
-    public function newCommentAction(Request $request)
-    {
-        $comment = new Comment();
-
-        $form = $this->createForm(AdminCommentType::class, $comment);
-
-        $buttonName = 'Додати коментар';
-
-        if ($request->getMethod() == 'POST') {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($comment);
-                $em->flush();
-                return $this->redirectToRoute('admin_comments', ['page' => 1]);
-            }
-        }
-
-        return $this->render('admin/new_article.html.twig', array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'Новий коментар',
-            'form' => $form->createView(),
-            'button' => $buttonName
-        ));
-    }
-
-    /**
-     * @Route("/admin/comment/{id}/edit", name="edit_comment")
-     */
-    public function editCommentAction(Request $request, $id)
-    {
-        $comment = $this->getDoctrine()->getRepository('AppBundle:Comment')->findOneBy(['id' => $id]);
-
-        $form = $this->createForm(AdminCommentType::class, $comment);
-
-        $buttonName = 'Зберегти';
-
-        if ($request->getMethod() == 'POST') {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($comment);
-                $em->flush();
-                return $this->redirectToRoute('admin_comments', ['page' => 1]);
-            }
-        }
-
-        return $this->render('admin/new_article.html.twig', array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'Редагувати коментар',
-            'form' => $form->createView(),
-            'button' => $buttonName
-        ));
-    }
-
-    /**
-     * @Route("/admin/comments/{page}", name="admin_comments")
-     */
-    public function commentsPageAction(Request $request, $page = 1)
-    {
-        $comments = $this->getDoctrine()->getRepository('AppBundle:Comment')->getPage($page);
-
-        return $this->render('admin/all_comments.html.twig', array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'title' => 'Всі коментарі',
-            'comments' => $comments,
-            'pages' => (int) count($comments)/9,
             'current' => $page
         ));
     }
@@ -500,6 +441,21 @@ class AdminController extends Controller
     }
 
     /**
+     * @Route("/admin/page/{id}/delete", name="delete_page")
+     * @ParamConverter("page", class="AppBundle:Page", options={"id" = "id"})
+     */
+    public function deletePageAction(Request $request, Page $page)
+    {
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($page);
+        $em->flush();
+
+        return $this->redirectToRoute("admin_pages");
+    }
+
+    /**
      * @Route("/admin/pages/{page}", name="admin_pages")
      */
     public function pagesAction(Request $request, $page = 1)
@@ -518,7 +474,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin/menu", name="admin_menu")
      */
-    public function editMenuAction(Request $request)
+    public function newMenuAction(Request $request)
     {
         $menuItem = new MenuItem();
 
@@ -530,6 +486,8 @@ class AdminController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 if ($menuItem->getParent()){
                     $menuItem->setParent($menuItem->getParent()->getId());
+                    $em->persist($menuItem);
+                    $em->flush();
                     $parent = $this->getDoctrine()->getRepository('AppBundle:MenuItem')->findOneBy(['id' => $menuItem->getParent()]);
                     $parent->setChilds($menuItem);
                     $em->persist($parent);
@@ -545,5 +503,55 @@ class AdminController extends Controller
             'title' => 'Меню',
             'form' => $form->createView()
         ));
+    }
+
+    /**
+     * @Route("/admin/menu/{id}/edit", name="admin_menu_edit")
+     * @ParamConverter("menuItem", class="AppBundle:MenuItem", options={"id" = "id"})
+     */
+    public function editMenuAction(Request $request, $menuItem)
+    {
+        $form = $this->createForm(new MenuItemType(), $menuItem);
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                if ($menuItem->getParent()){
+                    $menuItem->setParent($menuItem->getParent());
+                    echo "<pre>";
+                    var_dump($menuItem);
+                    echo "</pre>";
+                    exit;
+                    $parent = $this->getDoctrine()->getRepository('AppBundle:MenuItem')->findOneBy(['id' => $menuItem->getParent()]);
+                    $parent->setChilds($menuItem);
+                    $em->persist($parent);
+                }
+                $em->persist($menuItem);
+                $em->flush();
+                return $this->redirectToRoute('admin_menu');
+            }
+        }
+
+        return $this->render('admin/new_menu_item.html.twig', array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'title' => 'Редагувати пункт меню',
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/admin/menu/{id}/delete", name="admin_menu_delete")
+     * @ParamConverter("menuItem", class="AppBundle:MenuItem", options={"id" = "id"})
+     */
+    public function deleteMenuItemAction(Request $request, MenuItem $menuItem)
+    {
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($menuItem);
+        $em->flush();
+
+        return $this->redirectToRoute("admin_menu");
     }
 }

@@ -1,67 +1,67 @@
 {% extends 'base.html.twig' %}
 
-    {% block content %}
-        <div class="content">
-            <div class="col-lg-12">
-                <h1>{{ title }}</h1>
-            </div>
-            {% for article in articles %}
-                <div class="item-block col col-lg-4">
-                    <div class="inner">
-                        {#<div class="img" style="background-image: url('{{ asset('uploads/') }}{{ article.image.path }}')"></div>#}
-                        {# FOR FIXTURES #}
-                        <div class="img" style="background-image: url('{{ article.image }}')"></div>
-                        {# FOR FIXTURES #}
-                        <div class="inner-text">
-                            <a class="category" href="{{ path("category", { "slug" : article.categories.slug}, true) }}/1">
-                                <i class="fa fa-{{ article.categories.class }}"></i> {{ article.categories.name }}
+{% block body_classes %}blog masonry-style{% endblock %}
+
+{% block content %}
+    <main role="main">
+        <div id="intro-wrap" data-height="27.778">
+            <div id="intro" class="preload darken">
+                <div class="intro-item" style="background-image: url({{ category.image }});">
+                    <div class="caption">
+                        <h2>{{ category.name }}</h2>
+                        <p>{{ category.description }}</p>
+                    </div><!-- caption -->
+                    <div class="photocaption">
+                        <h4>A shot by <a href="http://vk.com/awaylastdays" target="blank" alt="Vadim Bruklia">Vadim Bruklia</a></h4>
+                    </div><!-- photocaption -->
+                </div><!-- intro -->
+            </div><!-- intro -->
+        </div><!-- intro-wrap -->
+        {#{{  dump(articles) }}#}
+        <div id="main" class="row">
+            <div class="row-content buffer clear-after">
+                {#<ul class="inline cats filter-options">#}
+                    {#{% for category in categoryList() %}#}
+                        {#<li data-group="{{ category.name }}">{{ category.name }}</li>#}
+                    {#{% endfor %}#}
+                {#</ul>#}
+                <div class="grid-items preload">
+
+                    {% for article in articles %}
+                        <article data-groups=["{{ article.categories.name }}"]
+                                 class="shuffle-item item column {% if loop.index == 1 or loop.index == 4 or loop.index == 9 %} six {% else %} three {% endif %}">
+                            <a href="{{ path('article', {"slug" : article.slug}) }}">
+                                <figure style="background-image: url({{ article.image }})">
+                                        <span class="blog-overlay">
+                                            <i class="icon icon-doc"></i>
+                                        </span>
+                                </figure>
+                                <div class="blog-excerpt">
+                                    <div class="blog-excerpt-inner">
+                                        <h5 class="meta-post">{{ article.categories.name }}</h5>
+                                        <h2>{{ article.title }}</h2>
+                                        {% if loop.index != 1 and loop.index != 4 and loop.index != 9 %}
+                                            <p>{{ article.description | striptags }}</p>
+                                        {% endif %}
+                                    </div><!-- blog-excerpt-inner -->
+                                </div><!-- blog-excerpt -->
                             </a>
-                            <a class="title" href="/article/{{ article.slug }}">{{ article.title }}</a>
+                        </article>
+                    {% endfor %}
 
-                            <p class="desc">{{ article.description }}...</p>
-
-                            <div class="item-footer">
-                                <hr>
-                                <ul class="meta_data">
-                                    <li class="author">
-                                        <a class="url fn" href="/{{ path( "user", { "slug" : article.users.slug }, true ) }}">
-                                            <span class="fa fa-user"></span>{{ article.users.firstName }}
-                                        </a>
-                                    </li>
-                                    {#<li class="comment">#}
-                                        {#<a href="/"><span class="fa fa-comment-o"></span>{{ article.comments|length }}</a>#}
-                                    {#</li>#}
-                                    {#<li class="like">#}
-                                            {#<span class="post-like">#}
-                                                {#<span class="fa fa-heart-o"></span>#}
-                                                {#<span class="count">{{ article.likes|length }}</span>#}
-                                            {#</span>#}
-                                    {#</li>#}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-        <div id="pagination">
-                <div class="">
-                    <ul class="pagination">
-                        {% if articles|length / 9 > 1 %}
-                            {% for page in 1..pages + 1 %}
-                                {% if page == current %}
-                                    <li><span class="page-numbers current"><span class="num">{{ page }}</span></span></li>
-                                {% else %}
-                                    <li><a class="page-numbers" href="/page/{{ page }}"><span class="num">{{ page }}</span></a></li>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
+                    <div class="shuffle-sizer three"></div>
+                </div><!-- grid-items -->
+                <div id="pagination">
+                    <ul class="clear-after reset plain">
+                        <li id="older" class="pagination-nav"><a href="#" class="button transparent aqua"><i class="fa fa-chevron-left"></i><span class="label">Пред</span></a></li>
+                        <li id="newer" class="pagination-nav"><a href="#" class="button transparent aqua"><span class="label">След</span><i class="fa fa-chevron-right"></i></a></li>
                     </ul>
                 </div>
-        </div>
+            </div><!-- row-content -->
+        </div><!-- row -->
+    </main><!-- main -->
+{% endblock content %}
 
-
-    {% endblock content %}
 
 
 

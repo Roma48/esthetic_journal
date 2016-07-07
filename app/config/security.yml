@@ -6,8 +6,8 @@ security:
     providers:
         user_db:
             entity: { class: AppBundle\Entity\User, property: username }
-        hwi:
-            id: hwi_oauth.user.provider
+#        hwi:
+#            id: hwi_oauth.user.provider
 
     encoders:
             AppBundle\Entity\User:
@@ -24,16 +24,11 @@ security:
             form_login:
                 login_path: /login
                 check_path: /login_check
-            oauth:
-                resource_owners:
-                    facebook:           "/login/check-facebook"
-                    google:             "/login/check-google"
-                    vkontakte:          "/login/check-vkontakte"
-                login_path:        /admin
-                use_forward:       false
-                failure_path:      /
-                oauth_user_provider:
-                    service: hwi_oauth.user.provider.entity
+                default_target_path: /admin
+                always_use_default_target_path: true
+                use_referer: true
+                target_path_parameter: /admin
+                remember_me: true
             logout:
                 path:   /logout
                 target: /

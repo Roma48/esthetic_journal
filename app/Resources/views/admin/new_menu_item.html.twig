@@ -2,10 +2,7 @@
 
     {% block content %}
         <h1>{{ title }}</h1>
-        <br>
-        {{ renderAdminMenu() | raw }}
-        <br>
-        <h3>Додати пункт меню</h3>
+
         {{ form_start(form, {'attr' : {'id': 'form_menu'}}) }}
         <div>
             {{ form_widget(form) }}
