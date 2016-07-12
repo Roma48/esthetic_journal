@@ -308,6 +308,9 @@ class AdminController extends Controller
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+                if ($category->getParent()){
+                    $category->setParent($category->getParent()->getId());
+                }
                 $em->persist($category);
                 $em->flush();
                 return $this->redirectToRoute('admin_categories', ['page' => 1]);
@@ -337,6 +340,9 @@ class AdminController extends Controller
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+                if ($category->getParent()){
+                    $category->setParent($category->getParent()->getId());
+                }
                 $em->persist($category);
                 $em->flush();
                 return $this->redirectToRoute('admin_categories', ['page' => 1]);

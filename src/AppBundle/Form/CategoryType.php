@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -33,9 +34,18 @@ class CategoryType extends AbstractType
                 'label' => 'Css class',
                 'attr' => ['class' => 'form-control']
             ])
-//            ->add("", SlideType::class, [
-//                'label' => ' '
-//            ])
+            ->add("parent", EntityType::class, [
+                'class' => 'AppBundle\Entity\Category',
+                'query_builder' => function(EntityRepository $em){
+                    return $em->createQueryBuilder('c')
+                        ->where('c.parent = 0');
+                },
+                'choice_label' => 'name',
+                'placeholder' => ' ',
+                'label' => 'Parent',
+                'attr' => ['class' => 'form-control'],
+                'required' => false
+            ])
         ;
     }
     public function configureOptions(OptionsResolver $resolver)

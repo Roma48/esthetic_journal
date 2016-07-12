@@ -38,6 +38,11 @@ class Category
     protected $description;
 
     /**
+     * @ORM\Column(type="integer", options={"default":0}, nullable=true)
+     */
+    protected $parent;
+
+    /**
      * @var
      * @ORM\Column(type="string")
      */
@@ -322,4 +327,19 @@ class Category
         $this->description = $description;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param mixed $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
 }

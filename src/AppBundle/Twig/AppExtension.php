@@ -3,6 +3,7 @@
 namespace AppBundle\Twig;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Category;
 use AppBundle\Entity\MenuItem;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -50,7 +51,8 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFunction('categoryList', [$this, 'categoryList']),
             new \Twig_SimpleFunction('renderMenu', [$this, 'renderMenu']),
             new \Twig_SimpleFunction('renderAdminMenu', [$this, 'renderAdminMenu']),
-            new \Twig_SimpleFunction('replaceBodySlider', [$this, 'replaceBodySlider'])
+            new \Twig_SimpleFunction('replaceBodySlider', [$this, 'replaceBodySlider']),
+            new \Twig_SimpleFunction('renderCategories', [$this, 'renderCategories'])
         ];
     }
 
@@ -103,7 +105,7 @@ class AppExtension extends \Twig_Extension
      */
     public function sortingMenu()
     {
-        $menuItems = $this->doctrine->getManager()->getRepository('AppBundle:MenuItem')->findAll();
+        $menuItems = $this->doctrine->getManager()->getRepository('AppBundle:MenuItem')->findBy([], ['weight' => 'ASC']);
         $sortedMenu = [];
         foreach ($menuItems as $menuItem){
             if (!$menuItem->getParent()){
@@ -125,7 +127,10 @@ class AppExtension extends \Twig_Extension
      */
     public function getChilds(MenuItem $menuItem)
     {
-        $childs = $this->doctrine->getManager()->getRepository('AppBundle:MenuItem')->findBy(['parent' => $menuItem->getId()]);
+        $childs = $this->doctrine->getManager()->getRepository('AppBundle:MenuItem')->findBy(
+            ['parent' => $menuItem->getId()],
+            ['weight' => 'ASC']
+        );
 
         $arr = [];
         if ($childs){
@@ -211,6 +216,75 @@ class AppExtension extends \Twig_Extension
         $output .= '</ul>';
 
         return $output;
+    }
+
+    public function renderCategories()
+    {
+        $categoryItems = $this->sortingCategories();
+        $output = '<ul class="categories">';
+        foreach ($categoryItems as $categoryItem){
+            $output .= '<li class="category-item">';
+            $output .= '<a href="' . $this->generator->generate('category', array('slug' => $categoryItem['slug'])) . '">' . $categoryItem['title'] . '</a>';
+            if ($categoryItem['childs']){
+                $output .= '<ul class="sub-category">';
+                foreach ($categoryItem['childs'] as $child){
+                    $output .= '<li>';
+                    $output .= '-- <a href="' . $this->generator->generate('category', array('slug' => $child['slug'])) . '">' . $child['title'] . '</a>';
+                    $output .= '</li>';
+                }
+                $output .= '</ul>';
+            }
+            $output .= '</li>';
+        }
+        $output .= '</ul>';
+
+        return $output;
+    }
+
+    /**
+     * @return array
+     */
+    public function sortingCategories()
+    {
+        $categoryItems = $this->doctrine->getManager()->getRepository('AppBundle:Category')->findAll();
+        $sortedCategories = [];
+        foreach ($categoryItems as $categoryItem){
+            if (!$categoryItem->getParent()){
+                $sortedCategories[] = [
+                    'id' => $categoryItem->getId(),
+                    'slug' => $categoryItem->getSlug(),
+                    'title' => $categoryItem->getName(),
+                    'childs' => $this->getCategoryChilds($categoryItem)
+                ];
+            }
+        }
+
+        return $sortedCategories;
+    }
+
+    /**
+     * @param Category $categoryItem
+     * @return array
+     */
+    public function getCategoryChilds(Category $categoryItem)
+    {
+        $childs = $this->doctrine->getManager()->getRepository('AppBundle:Category')->findBy(
+            ['parent' => $categoryItem->getId()]
+        );
+
+        $arr = [];
+        if ($childs){
+            foreach ($childs as $child){
+                $arr[] = [
+                    'id' => $child->getId(),
+                    'slug' => $child->getSlug(),
+                    'title' => $child->getName(),
+                    'childs' => $this->getCategoryChilds($child)
+                ];
+            }
+        }
+
+        return $arr;
     }
 
     /**

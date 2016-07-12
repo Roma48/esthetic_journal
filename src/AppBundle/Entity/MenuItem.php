@@ -34,6 +34,12 @@ class MenuItem
     protected $url;
 
     /**
+     * @var integer
+     * @ORM\Column(type="integer", options={"default":0}, nullable=true)
+     */
+    protected $weight;
+
+    /**
      * @return String
      */
     public function getTitle()
@@ -79,5 +85,21 @@ class MenuItem
     public function setUrl($url)
     {
         $this->url = $url;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @param int $weight
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
     }
 }

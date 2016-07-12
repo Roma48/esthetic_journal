@@ -49,9 +49,7 @@
                         <div class="widget">
                             <h4>Рубрики</h4>
                             <ul class="plain">
-                                {% for category in categoryList() %}
-                                    <li><a href="{{ path('category', {'slug' : category.slug }) }}">{{ category.name }}</a></li>
-                                {% endfor %}
+                                {{ renderCategories() | raw }}
                             </ul>
                         </div>
                     </aside>
